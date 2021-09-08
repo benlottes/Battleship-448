@@ -7,12 +7,17 @@ class board{
 	attemptedShot(row,col){
 		if(board[row][col]==0){
 			board[row][col]=1;
+			return true;
 		}
 		else{
 			let boat = board[row][col];
 			let [rowHead, colHead] = boat.getHead();
 			let distance = Math.abs((rowHead-row)+(col-colHead));
-			boat.registerHit(distance);
+			if(boat.hits[distance] != 1){
+				boat.registerHit(distance);
+				return true;
+			}
+			return false;
 		}
 	}		
 }
