@@ -17,7 +17,37 @@ class board{
 				boat.registerHit(distance);
 				return true;
 			}
-			return false;
 		}
-	}		
+		return false;
+	}
+	placeShip(newShip, rowTail, colTail){
+		[rowHead, colHead] = newShip.getHead;
+		if(rowHead-rowTail == 0 && colHead-colTail == 0){
+			this.board[rowHead][colHead] = newShip;
+		}
+		else if(rowHead-rowTail == 0){
+			if(colHead-colTail < 0){
+				for(let i = colHead; i < colTail; i++){
+					this.board[rowHead][i] = newShip;
+				}
+			}
+			else{
+				for(let i = colHead; i > colTail; i--){
+					this.board[rowHead][i] = newShip;
+				}
+			}
+		}
+		else if(colHead-colTail == 0){
+			if(rowHead-rowTail < 0){
+				for(let i = rowHead; i < rowTail; i--){
+					this.board[i][colHead] = newShip;
+				}
+			}
+			else{
+				for(let i = rowHead; i > rowTail; i++){
+					this.board[i][colHead] = newShip;
+				}
+			}
+		}
+	}
 }
