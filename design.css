@@ -1,0 +1,40 @@
+body{
+    background-color: white;
+}
+
+.gridLeft{
+    position: absolute;
+    left: 200px;
+    display: grid;
+    grid-template-columns: repeat(9, 60px);
+    grid-template-rows: repeat(10, 60px);
+    width: 400px;
+    height: 300px;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.gridRight{
+    position: absolute;
+    left: 850px;
+    display: grid;
+    grid-template-columns: repeat(9, 60px);
+    grid-template-rows: repeat(10, 60px);
+    width: 400px;
+    height: 300px;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.cell{
+    border: 5px solid black;
+    background-color: white;
+    outline: 5px solid black;
+}
+
+/*hover effect on the cells*/
+.cell:hover{
+    /*background-color: red;*/
+    background-color: rgb(75, 204, 255);
+}
+

@@ -1,12 +1,83 @@
+<!DOCTYPE html>
 <HTML>
+	<title>BattleShip</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link href = "design.css" rel = "stylesheet" type = "text/css">
 	<script src="ship.js"></script>
 	<script src="board.js"></script>
 	<script src="main.js"></script>
 	<body>
+		<!--
 		<canvas id="myCanvas"
 				width="1500"
 				height="800"
 				style="border: 1px solid black">
 		</canvas>
+		-->
+		<div class = "gridLeft">
+			<!--9x10 grid of cells for battleship board-->
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+		</div>
+
+		<div class = "gridRight">
+			<!--9x10 grid of cells for battleship board-->
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+		</div>
 	</body>	
 </HTML>
