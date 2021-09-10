@@ -5,12 +5,12 @@ class board{
 		this.board=new Array(this.row).fill().map(() => (new Array(this.column).fill().map(() => 0)));
 	}	
 	attemptedShot(row,col){
-		if(board[row][col]==0){
-			board[row][col]=1;
+		if(this.board[row][col]==0){
+			this.board[row][col]=1;
 			return true;
 		}
 		else{
-			let boat = board[row][col];
+			let boat = this.board[row][col];
 			let [rowHead, colHead] = boat.getHead();
 			let distance = Math.abs((rowHead-row)+(col-colHead));
 			if(boat.hits[distance] != 1){
@@ -39,15 +39,61 @@ class board{
 		}
 		else if(colHead-colTail == 0){
 			if(rowHead-rowTail < 0){
-				for(let i = rowHead; i <= rowTail; i--){
+				for(let i = rowHead; i <= rowTail; i++){
 					this.board[i][colHead] = newShip;
 				}
 			}
 			else{
-				for(let i = rowHead; i >= rowTail; i++){
+				for(let i = rowHead; i >= rowTail; i--){
 					this.board[i][colHead] = newShip;
 				}
 			}
 		}
+	}
+	//Needs testing to make sure it rejects tails with stuff in between
+	getViableTail(ship){
+		let [rowHead, colHead] = ship.getHead();
+		let viableTails = [];
+		let viable = true;
+		for(let i = 0; i < ship.getSize()-1; i++){
+			if(rowHead+i > this.row || this.board[rowHead+i][colHead] != 0){
+				viable = false;
+				break;
+			}
+		}
+		if(viable == true){
+			viableTails.push([rowHead+(ship.getSize()-1),colHead]);
+		}
+		viable = true;
+		for(let i = 0; i < ship.getSize()-1; i++){
+			if(rowHead-i < 0 || this.board[rowHead-i][colHead] != 0){
+				viable = false;
+				break;
+			}
+		}
+		if(viable == true){
+			viableTails.push([rowHead-(ship.getSize()-1),colHead]);
+		}
+		viable = true;
+		for(let i = 0; i < ship.getSize()-1; i++){
+			if(colHead+i > this.column || this.board[rowHead][colHead+i] != 0){
+				viable = false;
+				break;
+			}
+		}
+		if(viable == true){
+			viableTails.push([rowHead,colHead+(ship.getSize()-1)]);
+		}
+		viable = true;
+		for(let i = 0; i < ship.getSize()-1; i++){
+			if(colHead-i < 0 || this.board[rowHead][colHead-i] != 0){
+				viable = false;
+				break;
+			}
+		}
+		if(viable == true){
+			viableTails.push([rowHead,colHead-(ship.getSize()-1)]);
+		}
+		return viableTails;
 	}
 }
