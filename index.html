@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <HTML>
-	<title>BattleShip</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<link href = "design.css" rel = "stylesheet" type = "text/css">
-	<script src="ship.js"></script>
-	<script src="board.js"></script>
-	<script src="main.js"></script>
+	<head>
+		<title>BattleShip</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<link href = "design.css" rel = "stylesheet" type = "text/css">
+		<script src="ship.js"></script>
+		<script src="board.js"></script>
+		<script src="main.js"></script>
+	</head>
 	<body>
+		<div class="header"><h1>BattleShips</h1></div>
 		<!--
 		<canvas id="myCanvas"
 				width="1500"
@@ -14,13 +17,28 @@
 				style="border: 1px solid black">
 		</canvas>
 		-->
+
 		<div class = "gridLeft">
 			<!--9x10 grid of cells for battleship board-->
-			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
-			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">A1</h2></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">A2</h2></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">A3</h2></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">A4</h2></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">A5</h2></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">A6</h2></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">A7</h2></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">A8</h2></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">A9</h2></div>
 
-			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
-			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">B1</h2></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">B2</h2></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">B3</h2></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">B4</h2></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">B5</h2></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">B6</h2></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">B7</h2></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">B8</h2></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">B9</h2></div>
 
 			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
 			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
@@ -49,11 +67,25 @@
 
 		<div class = "gridRight">
 			<!--9x10 grid of cells for battleship board-->
-			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
-			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">A1</h2></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">A2</h2></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">A3</h2></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">A4</h2></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">A5</h2></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">A6</h2></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">A7</h2></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">A8</h2></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">A9</h2></div>
 
-			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
-			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">B1</h2></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">B2</h2></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">B3</h2></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">B4</h2></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">B5</h2></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">B6</h2></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">B7</h2></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">B8</h2></div>
+			<div class = "cell"><h2 style = "position:relative; left:10px; bottom:8px;">B9</h2></div>
 
 			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
 			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
