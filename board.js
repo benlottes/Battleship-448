@@ -1,15 +1,17 @@
 class board{
-	constructor (){
+	constructor (shipCount){
 		this.row=9;
 		this.column=10;
 		this.board=new Array(this.row).fill().map(() => (new Array(this.column).fill().map(() => 0)));
+		this.shipArray=new Array (shipCount);
+		
 	}	
 	attemptedShot(row,col){
-		if(this.board[row][col]==0){
+		if(this.board[row][col]==0){//empty spot - valid shot 
 			this.board[row][col]=1;
 			return true;
 		}
-		else{
+		else{//if a boat is hit - valid shot 
 			let boat = this.board[row][col];
 			let [rowHead, colHead] = boat.getHead();
 			let distance = Math.abs((rowHead-row)+(col-colHead));
@@ -18,10 +20,12 @@ class board{
 				return true;
 			}
 		}
-		return false;
+		return false;//not a valid shot 
 	}
 	placeShip(newShip, rowTail, colTail){
-		let [rowHead, colHead] = newShip.getHead();
+		let [rowHead, colHead] = newShip.getHead()		
+		shipArray.push(newShip);
+		
 		if(rowHead-rowTail == 0 && colHead-colTail == 0){
 			this.board[rowHead][colHead] = newShip;
 		}
@@ -96,4 +100,23 @@ class board{
 		}
 		return viableTails;
 	}
+	
+		
+	allSunk()
+	{
+		let counter=0;
+		for(let i=0;i<=shipCount;i++)
+		{
+			counter=counter+shipArray[i].isSunk();
+		}
+		if(counter==shipCount)
+		{
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+	}
+	
 }
