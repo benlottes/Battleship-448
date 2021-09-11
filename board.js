@@ -1,15 +1,17 @@
 class board{
-	constructor (){
+	constructor (shipCount){
 		this.row=9;
 		this.column=10;
 		this.board=new Array(this.row).fill().map(() => (new Array(this.column).fill().map(() => 0)));
+		this.shipArray=new Array (shipCount);
+		
 	}	
 	attemptedShot(row,col){
-		if(this.board[row][col]==0){
-			this.board[row][col]=1;
+		if(this.board[row][col]==0){//empty spot - valid shot 
+			this.board[row][col]=1;//if shot takes place replace zero with 1
 			return true;
 		}
-		else{
+		else{//if a boat is hit - valid shot 
 			let boat = this.board[row][col];
 			let [rowHead, colHead] = boat.getHead();
 			let distance = Math.abs((rowHead-row)+(col-colHead));
@@ -18,32 +20,34 @@ class board{
 				return true;
 			}
 		}
-		return false;
+		return false;//not a valid shot 
 	}
 	placeShip(newShip, rowTail, colTail){
-		let [rowHead, colHead] = newShip.getHead();
+		let [rowHead, colHead] = newShip.getHead()		
+		shipArray.push(newShip);//adds the ship in the main array 
+		
 		if(rowHead-rowTail == 0 && colHead-colTail == 0){
-			this.board[rowHead][colHead] = newShip;
+			this.board[rowHead][colHead] = newShip;//if its a 1x1 ship
 		}
-		else if(rowHead-rowTail == 0){
-			if(colHead-colTail < 0){
+		else if(rowHead-rowTail == 0){// vertical ship 
+			if(colHead-colTail < 0){//going down
 				for(let i = colHead; i <= colTail; i++){
 					this.board[rowHead][i] = newShip;
 				}
 			}
-			else{
+			else{//going down 
 				for(let i = colHead; i >= colTail; i--){
 					this.board[rowHead][i] = newShip;
 				}
 			}
 		}
-		else if(colHead-colTail == 0){
-			if(rowHead-rowTail < 0){
+		else if(colHead-colTail == 0){//horizontal ship  
+			if(rowHead-rowTail < 0){//going right 
 				for(let i = rowHead; i <= rowTail; i++){
 					this.board[i][colHead] = newShip;
 				}
 			}
-			else{
+			else{//going down 
 				for(let i = rowHead; i >= rowTail; i--){
 					this.board[i][colHead] = newShip;
 				}
@@ -96,4 +100,23 @@ class board{
 		}
 		return viableTails;
 	}
+	
+	//checks if all ships have been sunk 	
+	allSunk()
+	{
+		let counter=0;
+		for(let i=0;i<=shipCount;i++)
+		{
+			counter=counter+shipArray[i].isSunk();//checking if all ships have been sunk 
+		}
+		if(counter==shipCount)
+		{
+			return true;//if they have return true 
+		}
+		else {
+			return false;//if not return false
+		}
+		
+	}
+	
 }
