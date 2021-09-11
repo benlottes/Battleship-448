@@ -1,3 +1,46 @@
+let currentTurn = 1;
+let placeHead;
+let placeTail;
+
+//Need to block out screen and let them click for next turn and switch visible boats
+function switchTurn(){
+	if(currentTurn == 1){
+		currentTurn = 2;
+	}else{
+		currentTurn = 1;
+	}
+}
+//player clicks location, checkviabletails() is used to highlight options 
+//tail is clicked, placeShip() to place it, then move on to next ship.
+//function placeShips(board){
+	//for(let i = 1; i <= board.shipArray.length(); i++){
+		//placeHead = true;
+		
+//	}
+//}
+
+function playGame(shipCount){
+	let p1Board = new board(shipCount);
+	let p2Board = new board(shipCount);
+	
+	placeShips(p1Board);
+	switchTurn();
+	placeShips(p2Board);
+	switchTurn();
+	
+	let cont = true;
+	while(cont == true){
+		//Take a shot, make sure its the right Array (put in attemptedShot)
+		//track team somehow so the valid board changes
+		//attemptedShot() if true move on, otherwise 
+		//keep letting them shoot until they hit something valid
+		//check isSunk(), and notify for miss, hit or sink
+		//check allSunk() and if so winner
+		//switchTurn()
+	}
+	
+}
+
 document.addEventListener("DOMContentLoaded", () => { 
 	canvas = document.querySelector("#myCanvas")
 	console.log("Canvas and Context Loaded");
@@ -18,6 +61,15 @@ document.addEventListener("DOMContentLoaded", () => {
 		col++;
 		
 		$(this).click(function(){
+		//	if(placeHead != true && placeTail != true){
+		//		//shoot
+		//	}
+		//	else if(placeHead == true){
+				
+		//	} else {
+				
+		//	}
+			
 			console.log($(this).attr("row"))
 			console.log($(this).attr("col"))
 		});
