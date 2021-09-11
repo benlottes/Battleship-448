@@ -47,14 +47,13 @@ document.addEventListener("DOMContentLoaded", () => {
 	// ask user for number of ships to be played with
 	
 	let shipCount = window.prompt("How many ships do you want to play with? (minimum: 1 | maximum: 6"); // need to add checks to make sure an integer between 1 and 6 is passed in
-	/*while (true)
+	while (true)
 	{
-		let shipCount = window.prompt("How many ships do you want to play with? (minimum: 1 | maximum: 6");
-		if (shipCount<=6 &&shipCount>=1)
-		{
+		//let shipCount = window.prompt("How many ships do you want to play with? (minimum: 1 | maximum: 6");
+		if (shipCount<=6 &&shipCount>=1){
 		break;}
 		else {
-			window.prompt("Try Again");}
-	}*/
+			shipCount = window.prompt("Try Again! \n How many ships do you want to play with? (minimum: 1 | maximum: 6");}
+	}
 	
 })
