@@ -9,7 +9,7 @@ class board{
 	attemptedShot(row,col){
 		if(this.board[row][col]==0){//empty spot - valid shot 
 			this.board[row][col]=1;//if shot takes place replace zero with 1
-			return true;
+			return 'M';
 		}
 		else{//if a boat is hit - valid shot 
 			let boat = this.board[row][col];
@@ -17,10 +17,10 @@ class board{
 			let distance = Math.abs((rowHead-row)+(col-colHead));
 			if(boat.hits[distance] != 1){
 				boat.registerHit(distance);
-				return true;
+				return 'H';
 			}
 		}
-		return false;//not a valid shot 
+		return 'I';//not a valid shot 
 	}
 	placeShip(newShip, rowTail, colTail){
 		let [rowHead, colHead] = newShip.getHead()		
