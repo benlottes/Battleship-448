@@ -42,7 +42,7 @@ body{
 
 .cell{
     border: 5px solid black;
-    background-color: white;
+    background-color: transparent;
     outline: 5px solid black;
 }
 
@@ -53,6 +53,46 @@ body{
 
 /*hover effect on the cells*/
 .cell:hover{
-    /*background-color: red;*/
+    /*background-color:*/
     background-color: rgb(75, 204, 255);
+}
+
+#endTurn{
+	
+	position: relative;
+	left: -100px;
+	top: -20px;
+	
+     display:block;
+    margin: 0 auto;
+    margin-top: 10px;
+    /*background-color:white;*/
+    /*border: 2px solid transparent;*/
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size:1rem;
+    font-weight: 500;
+    line-height: 1;
+    /*padding: 15px 25px;*/
+    text-align: center;
+}
+
+#startTurn{
+	
+	position: relative;
+	left: 100px;
+	top: -50px;
+	
+     display:block;
+    margin: 0 auto;
+    margin-top: 10px;
+    /*background-color:white;*/
+    /*border: 2px solid transparent;*/
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size:1rem;
+    font-weight: 500;
+    line-height: 1;
+    /*padding: 15px 25px;*/
+    text-align: center;
 }

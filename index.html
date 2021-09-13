@@ -10,14 +10,7 @@
 	</head>
 	<body>
 		<div class="header"><h1>BattleShip</h1></div>
-		<!--
-		<canvas id="myCanvas"
-				width="1500"
-				height="800"
-				style="border: 1px solid black">
-		</canvas>
-		-->
-
+		
 		<div class = "gridLeft">
 			<!--9x10 grid of cells for battleship board-->
 			<div class = "blank"><h2 style = "position:relative; left:20px; bottom:8px;"><h2></div>
@@ -67,7 +60,6 @@
 			<div class = "blank"><h2 style = "position:relative; left:20px; bottom:8px;">J<h2></div>
 			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
 			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
-			
 		</div>
 		
 		<div class = "gridRight">
@@ -121,7 +113,12 @@
 			<div class = "cell"></div><div class = "cell"></div><div class = "cell"></div><div class = "cell"></div>
 			
 		</div>
-
+		
+		<!--end turn button-->
+		<button id = "endTurn">End Turn</button>
+		
+		<!--start turn button-->
+		<button id = "startTurn">Start Turn</button>
 		
 	</body>	
 </HTML>
