@@ -37,6 +37,46 @@ function playGame(shipCount){
 		//check isSunk(), and notify for miss, hit or sink
 		//check allSunk() and if so winner
 		//switchTurn()
+		let board;//check which the players turn 
+		if(currentTurn==1)
+		{
+			board = p1Board.attemptedShot();//add the parameter for row n col from the board
+			if (board=='H'){
+			//print that there was a hit
+				if (p1Board.allSunk()){
+					//print current player won
+					break;
+				}				
+			}
+			else if (board=='M'){
+				//print there was a miss			
+				switchTurn();
+				continue;
+			}
+			else if (board=='I'){
+				//continue hitting 
+			}
+		}
+		else if (currentTurn==2)
+		{
+			board = p2Board.attemptedShot();//add the parameter for row n col 
+			if (board=='H'){
+			//print that there was a hit
+				if (p2Board.allSunk()){
+					//print current player won
+					break;
+				}				
+			}
+			else if (board=='M'){
+				//print there was a miss			
+				switchTurn();
+				continue;
+			}
+			else if (board=='I'){
+				//continue hitting 
+			}
+		}		
+		switchTurn();
 	}
 	
 }
