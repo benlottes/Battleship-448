@@ -59,8 +59,46 @@ class board{
 		let [rowHead, colHead] = ship.getHead();
 		let viableTails = [];
 		let viable = true;
+		let size = ship.getSize();
+		/*
+		console.log("rh: "+ rowHead);
+		console.log("ch: "+ colHead);
+		*/
+		
+		viableTails.push([rowHead, parseInt(colHead) + ship.getSize()-1]);
+		viableTails.push([rowHead, colHead-ship.getSize()+1]);
+		viableTails.push([rowHead-ship.getSize()+1, colHead]);
+		viableTails.push([parseInt(rowHead)+ship.getSize()-1, colHead]);
+
+/*
+		if( (rowHead+ship.getSize()-1) >this.row 		 ||
+			(rowHead-ship.getSize()+1) < 	   0		 ||
+			(colHead+ship.getSize()-1) > this.column	 ||
+			(colHead-ship.getSize()+1) < 	   0			){
+			viable = false;
+		}
+		else{
+			viableTails.push([rowHead, colHead+ship.getSize()-1]);
+			viableTails.push([rowHead, colHead-ship.getSize()+1]);
+			viableTails.push([rowHead-ship.getSize()+1, colHead]);
+			viableTails.push([rowHead+ship.getSize()-1, colHead]);
+		}
+		*/
+		
+		/*
+		if(viable == true){
+			viableTails.push([rowHead+(ship.getSize()-1),colHead]);
+		}
+		*/
+		
+		
+		/*
+		let [rowHead, colHead] = ship.getHead();
+		let viableTails = [];
+		let viable = true;
+		
 		for(let i = 0; i < ship.getSize()-1; i++){
-			if(rowHead+i > this.row || this.board[rowHead+i][colHead] != 0){
+			if(rowHead+i > this.row){// || this.board[rowHead+i][colHead] != 0){
 				viable = false;
 				break;
 			}
@@ -68,6 +106,7 @@ class board{
 		if(viable == true){
 			viableTails.push([rowHead+(ship.getSize()-1),colHead]);
 		}
+		
 		viable = true;
 		for(let i = 0; i < ship.getSize()-1; i++){
 			if(rowHead-i < 0 || this.board[rowHead-i][colHead] != 0){
@@ -78,6 +117,7 @@ class board{
 		if(viable == true){
 			viableTails.push([rowHead-(ship.getSize()-1),colHead]);
 		}
+		
 		viable = true;
 		for(let i = 0; i < ship.getSize()-1; i++){
 			if(colHead+i > this.column || this.board[rowHead][colHead+i] != 0){
@@ -88,6 +128,7 @@ class board{
 		if(viable == true){
 			viableTails.push([rowHead,colHead+(ship.getSize()-1)]);
 		}
+		
 		viable = true;
 		for(let i = 0; i < ship.getSize()-1; i++){
 			if(colHead-i < 0 || this.board[rowHead][colHead-i] != 0){
@@ -98,6 +139,8 @@ class board{
 		if(viable == true){
 			viableTails.push([rowHead,colHead-(ship.getSize()-1)]);
 		}
+		*/
+		
 		return viableTails;
 	}
 	

@@ -51,11 +51,12 @@ body{
     background-color: white;
 }
 
-/*hover effect on the cells*/
+/*hover effect on the cells
 .cell:hover{
-    /*background-color:*/
+    /*background-color:;
     background-color: rgb(75, 204, 255);
 }
+*/
 
 #endTurn{
 	

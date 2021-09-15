@@ -85,67 +85,186 @@ document.addEventListener("DOMContentLoaded", () => {
 	canvas = document.querySelector("#myCanvas")
 	console.log("Canvas and Context Loaded");
 
-	let count = 0;
+	let count = 1;
 	let row = 0;
 	let col = 0;
+	let possibleTails;
 	// iterate through each cell in gridLeft by row and number them
     $(".gridLeft .cell").each(function(){
         $(this).attr("id", count);
-        count++;
-		if(col == 9){
-			col = 0;
-			row++;
+		$(this).attr("clicked", false);
+
+		if((count%10) == 0){
+			$(this).attr("row", Math.floor(count / 10));
+			$(this).attr("col", 10);
 		}
-		$(this).attr("row", row);
-		$(this).attr("col", col);
-		col++;
+		else{
+			$(this).attr("row", Math.floor(count / 10) + 1);
+			$(this).attr("col", count % 10);
+		}
 		
+        count++;
+		/*
+		let placeHead = true;
+		let placeTail = false;
 		$(this).click(function(){
-		//	if(placeHead != true && placeTail != true){
-		//		//shoot
-		//	}
-		//	else if(placeHead == true){
-				
-		//	} else {
-				
-		//	}
-			
+			//	if(placeHead != true && placeTail != true){
+			//		//shoot
+			//	}
+			//	else if(placeHead == true){
+			//		highlight space to show head location
+			//	} else {
+			//		highlight viable tail locations
+			//	} 			
+			/*
 			console.log($(this).attr("row"))
 			console.log($(this).attr("col"))
+			*
 		});
+		*/
 	});
 
-	count = 0;
+	count = 1;
 	row = 0;
 	col = 0;
 	// iterate through each cell in gridRight by row and number them
 	$(".gridRight .cell").each(function(){
-        $(this).attr("id", count);
-        count++;
-		if(col == 9){
-			col = 0;
-			row++;
-		}
-		$(this).attr("row", row);
-		$(this).attr("col", col);
-		col++;
 		
-		$(this).click(function(){
-			console.log($(this).attr("row"))
-			console.log($(this).attr("col"))
-		});
+        $(this).attr("id", count);
+        if((count%10) == 0){
+			$(this).attr("row", Math.floor(count / 10));
+			$(this).attr("col", 10);
+		}
+		else{
+			$(this).attr("row", Math.floor(count / 10) + 1);
+			$(this).attr("col", count % 10);
+		}
+		
+        count++;
 	});
-
-	// ask user for number of ships to be played with
 	
+	
+	// ask user for number of ships to be played with
 	let shipCount = window.prompt("How many ships do you want to play with? (minimum: 1 | maximum: 6"); // need to add checks to make sure an integer between 1 and 6 is passed in
 	while (true)
 	{
-		//let shipCount = window.prompt("How many ships do you want to play with? (minimum: 1 | maximum: 6");
 		if (shipCount<=6 &&shipCount>=1){
 		break;}
 		else {
 			shipCount = window.prompt("Try Again! \n How many ships do you want to play with? (minimum: 1 | maximum: 6");}
 	}
 	
+	// logic for placing ships
+	let boolChooseHead = true
+	let headRow;
+	let headCol;
+	let tailRow;
+	let tailCol;
+	let testShip;
+	let testBoard;
+	
+	// get location for head of ship
+	window.alert("Choose a head location");
+	
+	// this updates with new clicks but find a way to update color with click
+	$(".gridLeft .cell").click(function(){
+		headRow = $(this).attr("row");
+		headCol = $(this).attr("col");
+		
+		testShip = new ship(3, 1, headRow, headCol);
+		testBoard = new board(shipCount);
+	});
+		
+	
+	let color = {1: "grey", 2: "transparent", 3: "red"};
+	let loc = [];
+	let chooseHead = true;
+	let chooseTail = false;
+	let i = 1;
+	$(".gridLeft .cell").click(function(){
+		
+		//allow user to change mind
+		$(".gridLeft .cell").css("background-color", "transparent"); //clear previously chosen position
+		
+		if($(this).attr("clicked") == true)
+			$(this).attr("clicked", false);
+			i = 1;
+		
+		
+		// highlight selected head location in grey
+		$(this).css("background-color", color[i]);
+		$(this).attr("clicked", true);
+		
+		
+		// if any cell has been clicked, make other cells unable to be highlighted
+		for(let m=0; m<89; m++){
+			if(!document.querySelector("true")){
+				i = 2;
+				break;
+			}
+			else
+				i = 1;
+		}
+		
+		// get possible tail locations
+		possibleTails = testBoard.getViableTail(testShip);
+		
+		//highlight possible tail locations
+		for(let i = 0; i < possibleTails.length; i++){
+			let tempRow = possibleTails[i][0];
+			let tempCol = possibleTails[i][1];
+			$('.cell[ row = ' + tempRow + '][ col = ' + tempCol + ']').css("background-color", "rgb(255, 100, 100)");
+		}
+					
+		$(".gridLeft .cell").off("click");
+	});
+	
+	
+	$(".gridRight .cell").click(function(){
+		
+		for(let i = 0; i < possibleTails.length; i++){
+			if(possibleTails[i][0] == $(this).attr("row") && possibleTails[i][1] == $(this).attr("col")){
+				tailRow = $(this).attr("row");
+				tailCol = $(this).attr("col");
+				
+				$(".cell").css("background-color", "transparent");
+			}
+		}
+		$(".gridRight .cell").off("click");
+		
+	
+		// put ship on grid
+		for(let i=0; i < testShip.getSize(); i++){ 
+			$('.gridLeft .cell[ row = ' + headRow + '][ col = ' + headCol + ']').css("background-color", "grey");
+			$('.gridLeft .cell[ row = ' + tailRow + '][ col = ' + tailCol + ']').css("background-color", "grey");
+			
+			//fill in space in between
+			if(headRow == tailRow && headCol < tailCol){ //horizontal ship where headCol < tailCol
+				for(let i=1; i<3 - 1; i++){
+					let tempCol = (+headCol + +i);
+					$('.gridLeft .cell[ row = ' + headRow + '][ col = ' + tempCol + ']').css("background-color", "grey");
+				}
+			}
+			else if(headRow == tailRow && headCol > tailCol){ //horizontal ship where headCol > tailCol
+				for(let i=1; i<3 - 1; i++){
+					let tempCol = (+tailCol + +i);
+					$('.gridLeft .cell[ row = ' + headRow + '][ col = ' + tempCol + ']').css("background-color", "grey");
+				}
+			}
+			else if(headRow < tailRow && headCol == tailCol){ //vertical ship where headRow < tailRow
+				for(let i=1; i<3 - 1; i++){
+					let tempRow = (+headRow + +i);
+					$('.gridLeft .cell[ row = ' + tempRow + '][ col = ' + headCol + ']').css("background-color", "grey");
+				}
+			}
+			else if(headRow > tailRow && headCol == tailCol){ //vertical ship where headRow > tailRow
+				for(let i=1; i<3 - 1; i++){
+					let tempRow = (+tailRow + +i);
+					$('.gridLeft .cell[ row = ' + tempRow + '][ col = ' + headCol + ']').css("background-color", "grey");
+				}
+			}
+		}
+			
+	});
+
 })
