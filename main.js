@@ -265,7 +265,7 @@ function startGame(shipCount){
 						}
 					}
 					//check if more boats to place after this, if not choose tail choose head need to be false
-					p1Board.placeShip(ships[c-1], headRow, headCol);
+					p1Board.placeShip(ships[c-1], tailRow, tailCol);
 					chooseHead = true;
 					chooseTail = false;
 					c++;
