@@ -97,3 +97,23 @@ body{
     /*padding: 15px 25px;*/
     text-align: center;
 }
+
+#rectangle1 {
+    left: 70px;
+    margin-top: -40px;
+    position: absolute;
+    width: 650px;
+    height: 600px;
+    background-color: black;
+}
+
+ 
+
+#rectangle2 {
+    left: 790px;
+    margin-top: -40px;
+    position: absolute;
+    width: 650px;
+    height: 600px;
+    background-color: black;
+}

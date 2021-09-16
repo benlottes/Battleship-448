@@ -119,6 +119,27 @@
 		
 		<!--start turn button-->
 		<button id = "startTurn">Start Turn</button>
-		
+		  <div id = "rectangle1" style = "display:none"></div>
+        <div id = "rectangle2" style = "display:none"></div>
+        <script>
+			var rectangle1 = document.getElementById("rectangle1");
+			var rectangle2 = document.getElementById("rectangle2");
+
+	 
+
+			var endTurn = document.getElementById("endTurn");
+			endTurn.addEventListener("click",function(){
+				rectangle1.style.display = "block";
+				rectangle2.style.display = "block";
+			});
+
+	 
+
+			var startTurn = document.getElementById("startTurn");
+			startTurn.addEventListener("click",function(){
+				rectangle1.style.display = "none";
+				rectangle2.style.display = "none";
+			});
+        </script>
 	</body>	
 </HTML>
