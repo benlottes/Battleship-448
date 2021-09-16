@@ -3,7 +3,7 @@ class board{
 		this.row=9;
 		this.column=10;
 		this.board=new Array(this.row).fill().map(() => (new Array(this.column).fill().map(() => 0)));
-		this.shipArray=new Array (shipCount);
+		this.shipArray=new Array(shipCount);
 		
 	}	
 	attemptedShot(row,col){
@@ -24,7 +24,7 @@ class board{
 	}
 	placeShip(newShip, rowTail, colTail){
 		let [rowHead, colHead] = newShip.getHead()		
-		shipArray.push(newShip);//adds the ship in the main array 
+		this.shipArray.push(newShip);//adds the ship in the main array 
 		
 		if(rowHead-rowTail == 0 && colHead-colTail == 0){
 			this.board[rowHead][colHead] = newShip;//if its a 1x1 ship
@@ -65,12 +65,11 @@ class board{
 		console.log("ch: "+ colHead);
 		*/
 		
-		viableTails.push([rowHead, parseInt(colHead) + ship.getSize()-1]);
-		viableTails.push([rowHead, colHead-ship.getSize()+1]);
-		viableTails.push([rowHead-ship.getSize()+1, colHead]);
-		viableTails.push([parseInt(rowHead)+ship.getSize()-1, colHead]);
-
-/*
+		//viableTails.push([rowHead, parseInt(colHead) + ship.getSize()-1]);
+		//viableTails.push([rowHead, colHead-ship.getSize()+1]);
+		//viableTails.push([rowHead-ship.getSize()+1, colHead]);
+		//viableTails.push([parseInt(rowHead)+ship.getSize()-1, colHead]);
+		/*
 		if( (rowHead+ship.getSize()-1) >this.row 		 ||
 			(rowHead-ship.getSize()+1) < 	   0		 ||
 			(colHead+ship.getSize()-1) > this.column	 ||
@@ -83,22 +82,14 @@ class board{
 			viableTails.push([rowHead-ship.getSize()+1, colHead]);
 			viableTails.push([rowHead+ship.getSize()-1, colHead]);
 		}
-		*/
-		
-		/*
+	
 		if(viable == true){
 			viableTails.push([rowHead+(ship.getSize()-1),colHead]);
 		}
 		*/
 		
-		
-		/*
-		let [rowHead, colHead] = ship.getHead();
-		let viableTails = [];
-		let viable = true;
-		
-		for(let i = 0; i < ship.getSize()-1; i++){
-			if(rowHead+i > this.row){// || this.board[rowHead+i][colHead] != 0){
+		for(let i = 0; i < ship.getSize(); i++){
+			if(rowHead+i >= this.row || this.board[rowHead+i][colHead] != 0){	
 				viable = false;
 				break;
 			}
@@ -106,9 +97,8 @@ class board{
 		if(viable == true){
 			viableTails.push([rowHead+(ship.getSize()-1),colHead]);
 		}
-		
 		viable = true;
-		for(let i = 0; i < ship.getSize()-1; i++){
+		for(let i = 0; i < ship.getSize(); i++){
 			if(rowHead-i < 0 || this.board[rowHead-i][colHead] != 0){
 				viable = false;
 				break;
@@ -117,10 +107,9 @@ class board{
 		if(viable == true){
 			viableTails.push([rowHead-(ship.getSize()-1),colHead]);
 		}
-		
 		viable = true;
-		for(let i = 0; i < ship.getSize()-1; i++){
-			if(colHead+i > this.column || this.board[rowHead][colHead+i] != 0){
+		for(let i = 0; i < ship.getSize(); i++){
+			if(colHead+i >= this.column || this.board[rowHead][colHead+i] != 0){
 				viable = false;
 				break;
 			}
@@ -128,9 +117,8 @@ class board{
 		if(viable == true){
 			viableTails.push([rowHead,colHead+(ship.getSize()-1)]);
 		}
-		
 		viable = true;
-		for(let i = 0; i < ship.getSize()-1; i++){
+		for(let i = 0; i < ship.getSize(); i++){
 			if(colHead-i < 0 || this.board[rowHead][colHead-i] != 0){
 				viable = false;
 				break;
@@ -139,8 +127,6 @@ class board{
 		if(viable == true){
 			viableTails.push([rowHead,colHead-(ship.getSize()-1)]);
 		}
-		*/
-		
 		return viableTails;
 	}
 	

@@ -14,7 +14,7 @@ class ship{
 		return this.team;
 	}
 	getHead(){//getter for the head 
-		return [this.rowHead, this.colHead];
+		return [parseInt(this.rowHead), parseInt(this.colHead)];
 	}
 	
 	isSunk(){//edited the sunk function to return 1 or 0 but left the other function just in case
