@@ -170,7 +170,7 @@ function startGame(shipCount){
 	let i = 1;
 	let c = 1;
 	$(".gridLeft .cell").click(function(){
-		if(c < 7){
+		if(c <= shipCount){
 			console.log(ships);
 			if(chooseHead){
 				headRow = $(this).attr("row");
