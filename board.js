@@ -3,23 +3,23 @@ class board{
 		this.row=9;
 		this.column=10;
 		this.board=new Array(this.row).fill().map(() => (new Array(this.column).fill().map(() => 0)));
-		this.shipArray=new Array(shipCount);
+		this.shipArray=[];
 		
 	}	
 	attemptedShot(row,col){
-		if(this.board[row][col]==0){//empty spot - valid shot 
+		if(this.board[row][col] == 0){//empty spot - valid shot 
 			this.board[row][col]=1;//if shot takes place replace zero with 1
 			return 'M';
 		}
-		else{//if a boat is hit - valid shot 
+		else if(this.board[row][col] instanceof ship){//if a boat is hit - valid shot 
 			let boat = this.board[row][col];
 			let [rowHead, colHead] = boat.getHead();
 			let distance = Math.abs((rowHead-row)+(col-colHead));
 			if(boat.hits[distance] != 1){
 				boat.registerHit(distance);
 				return 'H';
-			}
 		}
+	}
 		return 'I';//not a valid shot 
 	}
 	placeShip(newShip, rowTail, colTail){
@@ -133,19 +133,14 @@ class board{
 	//checks if all ships have been sunk 	
 	allSunk()
 	{
-		let counter=0;
-		for(let i=0;i<=shipCount;i++)
-		{
-			counter=counter+shipArray[i].isSunk();//checking if all ships have been sunk 
+		let count = 0;
+		for(let i = 0; i < this.shipArray.length; i++){
+			count = count + this.shipArray[i].isSunk();
 		}
-		if(counter==shipCount)
-		{
-			return true;//if they have return true 
+		if(count == this.shipArray.length){
+			return true;
 		}
-		else {
-			return false;//if not return false
-		}
-		
+		return false;
 	}
 	
 }

@@ -18,8 +18,8 @@ class ship{
 	}
 	
 	isSunk(){//edited the sunk function to return 1 or 0 but left the other function just in case
-		for(let i = 0; i < size; i++){
-			if(hits[i] == 0){
+		for(let i = 0; i < this.size; i++){
+			if(this.hits[i] == 0){
 				return 0;//returns 0 is a ship has not been sunk 
 			}
 		}

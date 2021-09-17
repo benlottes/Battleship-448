@@ -1,12 +1,15 @@
 let currentTurn = 1;
+let hasShot = false;
 let placeHead;
 let placeTail;
 
 //Need to block out screen and let them click for next turn and switch visible boats
 function switchTurn(){
 	if(currentTurn == 1){
+		hasShot = false;
 		currentTurn = 2;
 	}else{
+		hasShot = false;
 		currentTurn = 1;
 	}
 }
@@ -140,6 +143,8 @@ document.addEventListener("DOMContentLoaded", () => {
 	//});
 })
 
+
+
 let p1Board;
 let p2Board;
 let Lships;
@@ -159,9 +164,6 @@ function startGame(shipCount){
 	let RtailCol;
 	p1Board = new board(shipCount);
 	p2Board = new board(shipCount);
-
-	// get location for head of ship
-	window.alert("Choose a head location");
 	
 	// this updates with new clicks but find a way to update color with click
 	/* $(".gridLeft .cell").click(function(){
@@ -275,12 +277,33 @@ function startGame(shipCount){
 					}
 					//check if more boats to place after this, if not choose tail choose head need to be false
 					p1Board.placeShip(Lships[LnumShips-1], LtailRow, LtailCol);
-					LchooseHead = true;
-					LchooseTail = false;
+					if(LnumShips <= shipCount){
+						LchooseHead = true;
+						LchooseTail = false;
+					}else{
+						LchooseHead = false;
+						LchooseTail = false;
+					}
 					LnumShips++;
 
 				}
-			}
+			} 
+			} else if (currentTurn == 2 && !hasShot) {
+				shotRow = parseInt($(this).attr("row"));
+				shotCol = parseInt($(this).attr("col"));
+				outcome = p1Board.attemptedShot(shotRow, shotCol);
+				console.log(shotRow + ' ' + shotCol + ' ' + outcome);
+				if(outcome == 'H'){
+					$('.gridLeft .cell[ row = ' + shotRow + '][ col = ' + shotCol + ']').css("background-color", "rgb(255, 0, 0)");
+					hasShot = true;
+					if(p1Board.allSunk()){
+						console.log("p2 wins!");
+						//P2 wins!
+					}
+				} else if (outcome == 'M'){
+					$('.gridLeft .cell[ row = ' + shotRow + '][ col = ' + shotCol + ']').css("background-color", "rgb(0, 0, 255)");
+					hasShot = true;
+				}
 		}
 	});
 	 $(".gridRight .cell").click(function(){
@@ -380,13 +403,35 @@ function startGame(shipCount){
 					}
 					//check if more boats to place after this, if not choose tail choose head need to be false
 					p2Board.placeShip(Rships[RnumShips-1], RtailRow, RtailCol);
-					RchooseHead = true;
-					RchooseTail = false;
+					if(RnumShips <= shipCount){
+						RchooseHead = true;
+						RchooseTail = false;
+					} else {
+						RchooseHead = false;
+						RchooseTail = false;
+					}
+
 					RnumShips++;
 
 				}
 			}
-		}
+		} else if (currentTurn == 1 && !hasShot) {
+				shotRow = parseInt($(this).attr("row"));
+				shotCol = parseInt($(this).attr("col"));
+				outcome = p2Board.attemptedShot(shotRow, shotCol);
+				console.log(shotRow + ' ' + shotCol + ' ' + outcome);
+				if(outcome == 'H'){
+					$('.gridRight .cell[ row = ' + shotRow + '][ col = ' + shotCol + ']').css("background-color", "rgb(255, 0, 0)");
+					hasShot = true;
+					if(p2Board.allSunk()){
+						console.log("p1 wins!");
+						//P1 wins!
+					}
+				} else if (outcome == 'M'){
+					$('.gridRight .cell[ row = ' + shotRow + '][ col = ' + shotCol + ']').css("background-color", "rgb(0, 0, 255)");
+					hasShot = true;
+				}
+			}
 	}); 
 	$("#startTurn").click(function(){
 		console.log('before' + currentTurn);
