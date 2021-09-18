@@ -5,7 +5,7 @@
 
 class ship{
 	
-	/*
+	/**
 	* The constructor creatses and array for each ship and stores the size, team, rowHead and colHead
 	* that are passed in 
 	*
@@ -24,7 +24,7 @@ class ship{
 		this.colHead = colHead;
 	}
 	
-	/*
+	/**
 	* Getter to return the size of  the ship
 	*
 	* @return size  
@@ -33,7 +33,7 @@ class ship{
 		return this.size;
 	}
 	
-	/*
+	/**
 	* Getter for the team the ship belongs to 
 	*
 	* @return team
@@ -42,7 +42,7 @@ class ship{
 		return this.team;
 	}
 	
-	/*
+	/**
 	* Getter for the for the head ship 
 	*
 	* @return rowHead and colHead 
@@ -51,7 +51,7 @@ class ship{
 		return [parseInt(this.rowHead), parseInt(this.colHead)];
 	}
 	
-	/*
+	/**
 	* Checks if the entire board has been sunk (returns 1-ship has been sunk or 0-ship not sunk)
 	*
 	* @return 0 or 1 
@@ -64,7 +64,7 @@ class ship{
 		}
 		return 1;//returns 1 if the ship has been sunk 
 	}
-	/*
+	/**
 	* Registers the hit on the appropriate location on the ship - converts the appropriate
 	* location on teh hits array to a 1 
 	*
