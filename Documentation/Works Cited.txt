@@ -1,0 +1,7 @@
+-------------JQuery-------------
+Author:John Resig and JQuery Team
+Date: March 2, 2021
+Title: JQuery
+Version: 3.6.0
+Type: Library
+URL: https://jquery.com/

@@ -1,4 +1,32 @@
-let currentTurn = 1;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: main.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: main.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>let currentTurn = 1;
 let hasShot = true;
 let LshipsPlaced = false;
 let RshipsPlaced = false;
@@ -98,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
  	shipCount = window.prompt("How many ships do you want to play with? (minimum: 1 | maximum: 6"); // need to add checks to make sure an integer between 1 and 6 is passed in
 	while (true)
 	{
-		if (shipCount<=6 &&shipCount>=1){
+		if (shipCount&lt;=6 &amp;&amp;shipCount>=1){
 			break;
 		}
 		else {
@@ -146,7 +174,7 @@ function restoreShips(turn){
 		$(".gridRight .cell").each(function(){
 			let row = parseInt($(this).attr('row'));
 			let col = parseInt($(this).attr('col'));
-			if(p2Board.board[row][col] instanceof ship && ($(this).css("background-color") != "rgb(255, 0, 0)")){ // if cell is ship and not a hit set to grey
+			if(p2Board.board[row][col] instanceof ship &amp;&amp; ($(this).css("background-color") != "rgb(255, 0, 0)")){ // if cell is ship and not a hit set to grey
 				$(this).css("background-color", "grey");
 			}
 		});
@@ -155,7 +183,7 @@ function restoreShips(turn){
 		$(".gridLeft .cell").each(function(){
 			let row = parseInt($(this).attr('row'));
 			let col = parseInt($(this).attr('col'));
-		    if(p1Board.board[row][col] instanceof ship && ($(this).css("background-color") != "rgb(255, 0, 0)")){ // if cell is ship and not a hit set to grey
+		    if(p1Board.board[row][col] instanceof ship &amp;&amp; ($(this).css("background-color") != "rgb(255, 0, 0)")){ // if cell is ship and not a hit set to grey
 				$(this).css("background-color", "grey");
 			}
 		});
@@ -215,7 +243,7 @@ function startGame(shipCount){
 	$('#endTurn').prop('disabled', true);
 	
 	$(".gridLeft .cell").click(function(){
-		if(currentTurn == 1 && LnumShips <= shipCount){
+		if(currentTurn == 1 &amp;&amp; LnumShips &lt;= shipCount){
 			if(LchooseHead){
 				LheadRow = $(this).attr("row");
 				LheadCol = $(this).attr("col");
@@ -234,7 +262,7 @@ function startGame(shipCount){
 						
 						
 						// if any cell has been clicked, make other cells unable to be highlighted
-						for(let m=0; m<89; m++){
+						for(let m=0; m&lt;89; m++){
 							if(!document.querySelector("true")){
 								LcolorIndex = 2;
 								break;
@@ -247,7 +275,7 @@ function startGame(shipCount){
 						LpossibleTails = p1Board.getViableTail(Lships[LnumShips-1]);
 						//highlight possible tail locations
 						if(Lships[LnumShips-1].getSize() > 1){
-							for(let i = 0; i < LpossibleTails.length; i++){
+							for(let i = 0; i &lt; LpossibleTails.length; i++){
 								let tempRow = LpossibleTails[i][0];
 								let tempCol = LpossibleTails[i][1];
 								$('.gridLeft .cell[ row = ' + tempRow + '][ col = ' + tempCol + ']').css("background-color", "rgb(255, 100, 100)");
@@ -262,12 +290,12 @@ function startGame(shipCount){
 				}
 				}else if(LchooseTail){
 					let isTail = false;
-					for(let i = 0; i < LpossibleTails.length; i++){
-						if(LpossibleTails[i][0] == $(this).attr("row") && LpossibleTails[i][1] == $(this).attr("col")){
+					for(let i = 0; i &lt; LpossibleTails.length; i++){
+						if(LpossibleTails[i][0] == $(this).attr("row") &amp;&amp; LpossibleTails[i][1] == $(this).attr("col")){
 							LtailRow = $(this).attr("row");
 							LtailCol = $(this).attr("col");
 							isTail = true;
-							for(let i = 0; i < LpossibleTails.length; i++){
+							for(let i = 0; i &lt; LpossibleTails.length; i++){
 								let tempRow = LpossibleTails[i][0];
 								let tempCol = LpossibleTails[i][1];
 								$('.gridLeft .cell[ row = ' + tempRow + '][ col = ' + tempCol + ']').css("background-color", "transparent");
@@ -276,31 +304,31 @@ function startGame(shipCount){
 					}
 					if(isTail){
 						// put ship on grid
-						for(let i=0; i < LnumShips-1; i++){ 
+						for(let i=0; i &lt; LnumShips-1; i++){ 
 							$('.gridLeft .cell[ row = ' + LheadRow + '][ col = ' + LheadCol + ']').css("background-color", "grey");
 							$('.gridLeft .cell[ row = ' + LtailRow + '][ col = ' + LtailCol + ']').css("background-color", "grey");
 							
 							//fill in space in between
-							if(LheadRow == LtailRow && LheadCol < LtailCol){ //horizontal ship where headCol < tailCol
-								for(let i=1; i< LnumShips-1; i++){
+							if(LheadRow == LtailRow &amp;&amp; LheadCol &lt; LtailCol){ //horizontal ship where headCol &lt; tailCol
+								for(let i=1; i&lt; LnumShips-1; i++){
 									let tempCol = (+LheadCol + +i);
 									$('.gridLeft .cell[ row = ' + LheadRow + '][ col = ' + tempCol + ']').css("background-color", "grey");
 								}
 							}
-							else if(LheadRow == LtailRow && LheadCol > LtailCol){ //horizontal ship where headCol > tailCol
-								for(let i=1; i< LnumShips-1; i++){
+							else if(LheadRow == LtailRow &amp;&amp; LheadCol > LtailCol){ //horizontal ship where headCol > tailCol
+								for(let i=1; i&lt; LnumShips-1; i++){
 									let tempCol = (+LtailCol + +i);
 									$('.gridLeft .cell[ row = ' + LheadRow + '][ col = ' + tempCol + ']').css("background-color", "grey");
 								}
 							}
-							else if(LheadRow < LtailRow && LheadCol == LtailCol){ //vertical ship where headRow < tailRow
-								for(let i=1; i< LnumShips-1; i++){
+							else if(LheadRow &lt; LtailRow &amp;&amp; LheadCol == LtailCol){ //vertical ship where headRow &lt; tailRow
+								for(let i=1; i&lt; LnumShips-1; i++){
 									let tempRow = (+LheadRow + +i);
 									$('.gridLeft .cell[ row = ' + tempRow + '][ col = ' + LheadCol + ']').css("background-color", "grey");
 								}
 							}
-							else if(LheadRow > LtailRow && LheadCol == LtailCol){ //vertical ship where headRow > tailRow
-								for(let i=1; i< LnumShips-1; i++){
+							else if(LheadRow > LtailRow &amp;&amp; LheadCol == LtailCol){ //vertical ship where headRow > tailRow
+								for(let i=1; i&lt; LnumShips-1; i++){
 									let tempRow = (+LtailRow + +i);
 									$('.gridLeft .cell[ row = ' + tempRow + '][ col = ' + LheadCol + ']').css("background-color", "grey");
 								}
@@ -313,7 +341,7 @@ function startGame(shipCount){
 						LnumShips++;
 					}
 				} 
-			} else if (currentTurn == 2 && !hasShot && RshipsPlaced) {
+			} else if (currentTurn == 2 &amp;&amp; !hasShot &amp;&amp; RshipsPlaced) {
 				shotRow = parseInt($(this).attr("row"));
 				shotCol = parseInt($(this).attr("col"));
 				outcome = p1Board.attemptedShot(shotRow, shotCol);
@@ -322,7 +350,7 @@ function startGame(shipCount){
 					$('.gridLeft .cell[ row = ' + shotRow + '][ col = ' + shotCol + ']').text("\nH");
 					hasShot = true;
 					
-					if(p1Board.board[shotRow][shotCol] instanceof ship && p1Board.board[shotRow][shotCol].isSunk()){
+					if(p1Board.board[shotRow][shotCol] instanceof ship &amp;&amp; p1Board.board[shotRow][shotCol].isSunk()){
 						$("#mode").text("You sunk your opponents 1x" + p1Board.board[shotRow][shotCol].getSize() + " battleship!");
 					}
 					
@@ -340,12 +368,12 @@ function startGame(shipCount){
 				}
 				
 			}
-		if(currentTurn == 1 && hasShot && LnumShips-1 == shipCount){
+		if(currentTurn == 1 &amp;&amp; hasShot &amp;&amp; LnumShips-1 == shipCount){
 			$('#endTurn').prop('disabled', false);
 		}
 	});
 	 $(".gridRight .cell").click(function(){
-		if(currentTurn == 2 && RnumShips <= shipCount){
+		if(currentTurn == 2 &amp;&amp; RnumShips &lt;= shipCount){
 			if(RchooseHead){
 				RheadRow = $(this).attr("row");
 				RheadCol = $(this).attr("col");
@@ -365,7 +393,7 @@ function startGame(shipCount){
 						
 						
 						// if any cell has been clicked, make other cells unable to be highlighted
-						for(let m=0; m<89; m++){
+						for(let m=0; m&lt;89; m++){
 							if(!document.querySelector("true")){
 								RcolorIndex = 2;
 								break;
@@ -378,7 +406,7 @@ function startGame(shipCount){
 						RpossibleTails = p2Board.getViableTail(Rships[RnumShips-1]);
 						//highlight possible tail locations
 						if(Rships[RnumShips-1].getSize() > 1){
-							for(let i = 0; i < RpossibleTails.length; i++){
+							for(let i = 0; i &lt; RpossibleTails.length; i++){
 								let tempRow = RpossibleTails[i][0];
 								let tempCol = RpossibleTails[i][1];
 								$('.gridRight .cell[ row = ' + tempRow + '][ col = ' + tempCol + ']').css("background-color", "rgb(255, 100, 100)");
@@ -394,12 +422,12 @@ function startGame(shipCount){
 				}
 				}else if(RchooseTail){
 					let isTail = false;
-					for(let i = 0; i < RpossibleTails.length; i++){
-						if(RpossibleTails[i][0] == $(this).attr("row") && RpossibleTails[i][1] == $(this).attr("col")){
+					for(let i = 0; i &lt; RpossibleTails.length; i++){
+						if(RpossibleTails[i][0] == $(this).attr("row") &amp;&amp; RpossibleTails[i][1] == $(this).attr("col")){
 							RtailRow = $(this).attr("row");
 							RtailCol = $(this).attr("col");
 							isTail = true;
-							for(let i = 0; i < RpossibleTails.length; i++){
+							for(let i = 0; i &lt; RpossibleTails.length; i++){
 								let tempRow = RpossibleTails[i][0];
 								let tempCol = RpossibleTails[i][1];
 								$('.gridRight .cell[ row = ' + tempRow + '][ col = ' + tempCol + ']').css("background-color", "transparent");
@@ -408,31 +436,31 @@ function startGame(shipCount){
 					}
 					if(isTail){
 						// put ship on grid
-						for(let i=0; i < RnumShips-1; i++){ 
+						for(let i=0; i &lt; RnumShips-1; i++){ 
 							$('.gridRight .cell[ row = ' + RheadRow + '][ col = ' + RheadCol + ']').css("background-color", "grey");
 							$('.gridRight .cell[ row = ' + RtailRow + '][ col = ' + RtailCol + ']').css("background-color", "grey");
 							
 							//fill in space in between
-							if(RheadRow == RtailRow && RheadCol < RtailCol){ //horizontal ship where headCol < tailCol
-								for(let i=1; i<RnumShips-1; i++){
+							if(RheadRow == RtailRow &amp;&amp; RheadCol &lt; RtailCol){ //horizontal ship where headCol &lt; tailCol
+								for(let i=1; i&lt;RnumShips-1; i++){
 									let tempCol = (+RheadCol + +i);
 									$('.gridRight .cell[ row = ' + RheadRow + '][ col = ' + tempCol + ']').css("background-color", "grey");
 								}
 							}
-							else if(RheadRow == RtailRow && RheadCol > RtailCol){ //horizontal ship where headCol > tailCol
-								for(let i=1; i< RnumShips-1; i++){
+							else if(RheadRow == RtailRow &amp;&amp; RheadCol > RtailCol){ //horizontal ship where headCol > tailCol
+								for(let i=1; i&lt; RnumShips-1; i++){
 									let tempCol = (+RtailCol + +i);
 									$('.gridRight .cell[ row = ' + RheadRow + '][ col = ' + tempCol + ']').css("background-color", "grey");
 								}
 							}
-							else if(RheadRow < RtailRow && RheadCol == RtailCol){ //vertical ship where headRow < tailRow
-								for(let i=1; i<RnumShips-1; i++){
+							else if(RheadRow &lt; RtailRow &amp;&amp; RheadCol == RtailCol){ //vertical ship where headRow &lt; tailRow
+								for(let i=1; i&lt;RnumShips-1; i++){
 									let tempRow = (+RheadRow + +i);
 									$('.gridRight .cell[ row = ' + tempRow + '][ col = ' + RheadCol + ']').css("background-color", "grey");
 								}
 							}
-							else if(RheadRow > RtailRow && RheadCol == RtailCol){ //vertical ship where headRow > tailRow
-								for(let i=1; i<RnumShips-1; i++){
+							else if(RheadRow > RtailRow &amp;&amp; RheadCol == RtailCol){ //vertical ship where headRow > tailRow
+								for(let i=1; i&lt;RnumShips-1; i++){
 									let tempRow = (+RtailRow + +i);
 									$('.gridRight .cell[ row = ' + tempRow + '][ col = ' + RheadCol + ']').css("background-color", "grey");
 								}
@@ -445,7 +473,7 @@ function startGame(shipCount){
 						RnumShips++;
 					}
 				}
-			} else if ((currentTurn == 1 && !hasShot) && LshipsPlaced) {
+			} else if ((currentTurn == 1 &amp;&amp; !hasShot) &amp;&amp; LshipsPlaced) {
 					shotRow = parseInt($(this).attr("row"));
 					shotCol = parseInt($(this).attr("col"));
 					outcome = p2Board.attemptedShot(shotRow, shotCol);
@@ -454,7 +482,7 @@ function startGame(shipCount){
 						$('.gridRight .cell[ row = ' + shotRow + '][ col = ' + shotCol + ']').text("\nH");
 						hasShot = true;
 						
-						if(p2Board.board[shotRow][shotCol] instanceof ship && p2Board.board[shotRow][shotCol].isSunk()){
+						if(p2Board.board[shotRow][shotCol] instanceof ship &amp;&amp; p2Board.board[shotRow][shotCol].isSunk()){
 							$("#mode").text("You sunk your opponents 1x" + p2Board.board[shotRow][shotCol].getSize() + " battleship!");
 						}
 						
@@ -471,7 +499,7 @@ function startGame(shipCount){
 						$('#endTurn').prop('disabled', false);
 					}
 				}
-			if(currentTurn == 2 && hasShot && RnumShips-1 == shipCount){
+			if(currentTurn == 2 &amp;&amp; hasShot &amp;&amp; RnumShips-1 == shipCount){
 				$('#endTurn').prop('disabled', false);
 			}
 	}); 
@@ -481,7 +509,7 @@ function startGame(shipCount){
 		$('#startTurn').prop('disabled', true);
 		$('#endTurn').prop('disabled', true);
 		
-		if (RshipsPlaced && LshipsPlaced)
+		if (RshipsPlaced &amp;&amp; LshipsPlaced)
 			$("#mode").text("Shoot"); // change game mode to shoot
 	});
 	$("#endTurn").click(function(){
@@ -499,4 +527,26 @@ function startGame(shipCount){
 		}
 			restoreShips(currentTurn);
 	});
-}
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="board.html">board</a></li><li><a href="ship.html">ship</a></li></ul><h3>Global</h3><ul><li><a href="global.html#endGame">endGame</a></li><li><a href="global.html#hideShips">hideShips</a></li><li><a href="global.html#restoreShips">restoreShips</a></li><li><a href="global.html#startGame">startGame</a></li><li><a href="global.html#switchTurn">switchTurn</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sat Sep 18 2021 18:45:57 GMT-0500 (Central Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
