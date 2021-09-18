@@ -176,11 +176,10 @@ function startGame(shipCount){
 				LheadRow = $(this).attr("row");
 				LheadCol = $(this).attr("col");
 				if(!(p1Board.board[LheadRow][LheadCol] instanceof ship)){
-					console.log('hey');
-					Lships.push(new ship(LnumShips, 1, parseInt(LheadRow), parseInt(LheadCol)));
+					possibleShip = new ship(LnumShips, 1, parseInt(LheadRow), parseInt(LheadCol));
 					
-					if(p1Board.getViableTail(Lships[LnumShips-1]).length != 0){
-					
+					if(p1Board.getViableTail(possibleShip).length != 0){
+						Lships.push(possibleShip);
 						if($(this).attr("clicked") == true)
 							$(this).attr("clicked", false);
 							LcolorIndex = 1; 
@@ -289,7 +288,7 @@ function startGame(shipCount){
 				}
 				$('#endTurn').prop('disabled', false);
 			}
-			if(LnumShips-1 == shipCount){
+			if(currentTurn == 1 && hasShot && LnumShips-1 == shipCount){
 				$('#endTurn').prop('disabled', false);
 			}
 	});
@@ -299,12 +298,11 @@ function startGame(shipCount){
 				RheadRow = $(this).attr("row");
 				RheadCol = $(this).attr("col");
 				if(!(p2Board.board[RheadRow][RheadCol] instanceof ship)){
-					Rships.push(new ship(RnumShips, 1, parseInt(RheadRow), parseInt(RheadCol)));
+					possibleShip = new ship(RnumShips, 1, parseInt(RheadRow), parseInt(RheadCol));
 					
-					if(p2Board.getViableTail(Rships[RnumShips-1]).length != 0){
-						//allow user to change mind
-						//$(".gridLeft .cell").css("background-color", "transparent"); //clear previously chosen position
-					
+					if(p2Board.getViableTail(possibleShip).length != 0){
+						Rships.push(possibleShip);
+						hasShot = true;
 						if($(this).attr("clicked") == true)
 							$(this).attr("clicked", false);
 							RcolorIndex = 1; 
@@ -414,7 +412,7 @@ function startGame(shipCount){
 					}
 					$('#endTurn').prop('disabled', false);
 				}
-			if(RnumShips-1 == shipCount){
+			if(currentTurn == 2 && hasShot && RnumShips-1 == shipCount){
 				$('#endTurn').prop('disabled', false);
 		}
 	}); 
