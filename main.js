@@ -82,6 +82,23 @@ function playGame(shipCount){
 	
 }
 
+function hideShips(turn){
+	if(turn == 1){
+		$(".gridLeft .cell").each(function(){
+			if( $(this).css("background-color") == "rgb(128, 128, 128)"){ // if cell is grey, make it transparent
+				$(this).css("background-color", "transparent");
+			}
+		});
+	}
+	else{
+		$(".gridRight .cell").each(function(){
+			if( $(this).css("background-color") == "rgb(128, 128, 128)"){ // if cell is grey, make it transparent
+				$(this).css("background-color", "transparent");
+			}
+		});
+	}	
+}
+
 document.addEventListener("DOMContentLoaded", () => { 
 	canvas = document.querySelector("#myCanvas")
 	console.log("Canvas and Context Loaded");
@@ -190,8 +207,6 @@ function startGame(shipCount){
 				Lships.push(new ship(LnumShips, 1, parseInt(LheadRow), parseInt(LheadCol)));
 				
 				if(p1Board.getViableTail(Lships[LnumShips-1]).length != 0){
-					//allow user to change mind
-					//$(".gridLeft .cell").css("background-color", "transparent"); //clear previously chosen position
 				
 					if($(this).attr("clicked") == true)
 						$(this).attr("clicked", false);
@@ -434,9 +449,7 @@ function startGame(shipCount){
 			}
 	}); 
 	$("#startTurn").click(function(){
-		console.log('before' + currentTurn);
+		hideShips(currentTurn);
 		switchTurn();
-		console.log('after ' +  currentTurn);
-		
 	});
 }
