@@ -1,5 +1,5 @@
 class board{
-	/*
+	/**
 	*Creates a ship object containing 9 rows, 10 columns, a 2d array to act as our board, and an array to contain
 	*all of our ships that we put on the board
 	*The 2D array is initilized to all 0s. When a miss is detected it is a 1, and the ships are added as ship objects.
@@ -14,7 +14,7 @@ class board{
 		this.shipArray=[];
 		
 	}
-	/*
+	/**
 	*The function verifies that the position is a legal move and then returns a value depending on
 	*what it hit. 
 	*@param row An integer describing the row index the player clicked shot at.
@@ -37,7 +37,7 @@ class board{
 		}
 		return 'I';//not a valid shot 
 	}
-	/*
+	/**
 	*The placeShip function is provided a ship, and an index in the array for the tail position
 	*The function then uses the newShip's head location to iterate through the board and add
 	*an instance of the ship in each of the indices from the head location to the tail location.
@@ -78,7 +78,7 @@ class board{
 			}
 		}
 	}
-	/*
+	/**
 	*The getViable tail function is provided a ship, which has a head location, and this function finds the indices of
 	*possible tail locations by iterating in each direction from the head location, breaking if it hits a border or a ship.
 	*@param ship A ship object used to locate the possible tail locations for
@@ -131,7 +131,7 @@ class board{
 		}
 		return viableTails;
 	}
-	/*
+	/**
 	*allSunk() iterates through the shipArray, calling the ship function isSunk() on each ship, then checking if all of the ships have been sunk.
 	*@param None
 	*@return A boolean, true if all of the ships in shipArray have been sunk, false otherwise.
