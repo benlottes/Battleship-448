@@ -277,6 +277,7 @@ function startGame(shipCount){
 				if(outcome == 'H'){
 					$('.gridLeft .cell[ row = ' + shotRow + '][ col = ' + shotCol + ']').css("background-color", "rgb(255, 0, 0)");
 					hasShot = true;
+					
 					if(p1Board.allSunk()){
 						console.log("p2 wins!");
 						//P2 wins!
