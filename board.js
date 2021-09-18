@@ -1,11 +1,26 @@
 class board{
+	/**
+	*Creates a ship object containing 9 rows, 10 columns, a 2d array to act as our board, and an array to contain
+	*all of our ships that we put on the board
+	*The 2D array is initilized to all 0s. When a miss is detected it is a 1, and the ships are added as ship objects.
+	*@constructor
+	*@param shipCount An integer describing how many ships each player is playing with.
+	*@return None
+	*/
 	constructor (shipCount){
 		this.row=9;
 		this.column=10;
 		this.board=new Array(this.row).fill().map(() => (new Array(this.column).fill().map(() => 0)));
 		this.shipArray=[];
 		
-	}	
+	}
+	/**
+	*The function verifies that the position is a legal move and then returns a value depending on
+	*what it hit. 
+	*@param row An integer describing the row index the player clicked shot at.
+	*@param col An integer describing the column index the player clicked shot at.
+	*@return a 'M' when the player misses, a 'H' when the player hits a ship, and an 'I' otherwise.
+	*/
 	attemptedShot(row,col){
 		if(this.board[row][col] == 0){//empty spot - valid shot 
 			this.board[row][col]=1;//if shot takes place replace zero with 1
@@ -18,10 +33,19 @@ class board{
 			if(boat.hits[distance] != 1){
 				boat.registerHit(distance);
 				return 'H';
+			}	
 		}
-	}
 		return 'I';//not a valid shot 
 	}
+	/**
+	*The placeShip function is provided a ship, and an index in the array for the tail position
+	*The function then uses the newShip's head location to iterate through the board and add
+	*an instance of the ship in each of the indices from the head location to the tail location.
+	*@param newShip A ship object to be placed onto the board
+	*@param rowTail An integer representing the row index of the tail
+	*@param colTail An integer representing the column index of the tail
+	*@return None
+	*/
 	placeShip(newShip, rowTail, colTail){
 		let [rowHead, colHead] = newShip.getHead()		
 		this.shipArray.push(newShip);//adds the ship in the main array 
@@ -54,40 +78,18 @@ class board{
 			}
 		}
 	}
-	//Needs testing to make sure it rejects tails with stuff in between
+	/**
+	*The getViable tail function is provided a ship, which has a head location, and this function finds the indices of
+	*possible tail locations by iterating in each direction from the head location, breaking if it hits a border or a ship.
+	*@param ship A ship object used to locate the possible tail locations for
+	*@return An array of indecies in form [int: row, int:col]
+	*/
 	getViableTail(ship){
 		let [rowHead, colHead] = ship.getHead();
 		let viableTails = [];
 		let viable = true;
 		let size = ship.getSize();
-		/*
-		console.log("rh: "+ rowHead);
-		console.log("ch: "+ colHead);
-		*/
-		
-		//viableTails.push([rowHead, parseInt(colHead) + ship.getSize()-1]);
-		//viableTails.push([rowHead, colHead-ship.getSize()+1]);
-		//viableTails.push([rowHead-ship.getSize()+1, colHead]);
-		//viableTails.push([parseInt(rowHead)+ship.getSize()-1, colHead]);
-		/*
-		if( (rowHead+ship.getSize()-1) >this.row 		 ||
-			(rowHead-ship.getSize()+1) < 	   0		 ||
-			(colHead+ship.getSize()-1) > this.column	 ||
-			(colHead-ship.getSize()+1) < 	   0			){
-			viable = false;
-		}
-		else{
-			viableTails.push([rowHead, colHead+ship.getSize()-1]);
-			viableTails.push([rowHead, colHead-ship.getSize()+1]);
-			viableTails.push([rowHead-ship.getSize()+1, colHead]);
-			viableTails.push([rowHead+ship.getSize()-1, colHead]);
-		}
-	
-		if(viable == true){
-			viableTails.push([rowHead+(ship.getSize()-1),colHead]);
-		}
-		*/
-		
+
 		for(let i = 0; i < ship.getSize(); i++){
 			if(rowHead+i >= this.row || this.board[rowHead+i][colHead] != 0){	
 				viable = false;
@@ -129,8 +131,11 @@ class board{
 		}
 		return viableTails;
 	}
-	
-	//checks if all ships have been sunk 	
+	/**
+	*allSunk() iterates through the shipArray, calling the ship function isSunk() on each ship, then checking if all of the ships have been sunk.
+	*@param None
+	*@return A boolean, true if all of the ships in shipArray have been sunk, false otherwise.
+	*/
 	allSunk()
 	{
 		let count = 0;
