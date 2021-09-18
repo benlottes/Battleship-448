@@ -106,6 +106,8 @@ function endGame(winner){
 	$(".gridLeft .cell").off("click");
 	$(".gridRight .cell").off("click");
 	restoreShips(currentTurn);
+	$('#startTurn').prop('disabled', true);
+	$('#endTurn').prop('disabled', true);
 	window.alert(winner + " won the game!");
 }
 
@@ -285,11 +287,9 @@ function startGame(shipCount){
 					$('.gridLeft .cell[ row = ' + shotRow + '][ col = ' + shotCol + ']').css("background-color", "rgb(0, 0, 255)");
 					hasShot = true;
 				}
-				$('#startTurn').prop('disabled', false);
 				$('#endTurn').prop('disabled', false);
 			}
 			if(LnumShips-1 == shipCount){
-				$('#startTurn').prop('disabled', false);
 				$('#endTurn').prop('disabled', false);
 			}
 	});
@@ -412,11 +412,9 @@ function startGame(shipCount){
 						$('.gridRight .cell[ row = ' + shotRow + '][ col = ' + shotCol + ']').css("background-color", "rgb(0, 0, 255)");
 						hasShot = true;
 					}
-					$('#startTurn').prop('disabled', false);
 					$('#endTurn').prop('disabled', false);
 				}
 			if(RnumShips-1 == shipCount){
-				$('#startTurn').prop('disabled', false);
 				$('#endTurn').prop('disabled', false);
 		}
 	}); 
@@ -428,11 +426,13 @@ function startGame(shipCount){
 	});
 	$("#endTurn").click(function(){
 		if(LnumShips-1 == shipCount){
+			$('#startTurn').prop('disabled', false);
 			LchooseHead = false;
 			LchooseTail = false;
 			LshipsPlaced = true;
 		}
 		if(RnumShips-1 == shipCount){
+			$('#startTurn').prop('disabled', false);
 			console.log("hey");
 			RshipsPlaced = true;
 			RchooseHead = false;
