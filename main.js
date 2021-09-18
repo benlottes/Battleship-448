@@ -170,6 +170,13 @@ let p2Board;
 let Lships;
 let Rships;
 
+function endGame(winner){
+	$(".gridLeft .cell").off("click");
+	$(".gridRight .cell").off("click");
+	restoreShips(currentTurn);
+	window.alert(winner + " won the game!");
+}
+
 function restoreShips(turn){
 	if(turn == 1){
 		$(".gridRight .cell").each(function(){
@@ -224,7 +231,10 @@ function startGame(shipCount){
 	Rships = [];
 	let LcolorIndex = 1;
 	let RcolorIndex = 1;
-
+	
+	$('#startTurn').prop('disabled', true);
+	$('#endTurn').prop('disabled', true);
+	
 	$(".gridLeft .cell").click(function(){
 		if(currentTurn == 1 && LnumShips <= shipCount){
 			if(LchooseHead){
@@ -333,11 +343,18 @@ function startGame(shipCount){
 				if(p1Board.allSunk()){
 					console.log("p2 wins!");
 					//P2 wins!
+					endGame("Player 2");
 				}
 			} else if (outcome == 'M'){
 				$('.gridLeft .cell[ row = ' + shotRow + '][ col = ' + shotCol + ']').css("background-color", "rgb(0, 0, 255)");
 				hasShot = true;
 			}
+			$('#startTurn').prop('disabled', false);
+			$('#endTurn').prop('disabled', false);
+		}
+		if(LnumShips-1 == shipCount){
+			$('#startTurn').prop('disabled', false);
+			$('#endTurn').prop('disabled', false);
 		}
 	});
 	 $(".gridRight .cell").click(function(){
@@ -451,16 +468,25 @@ function startGame(shipCount){
 					if(p2Board.allSunk()){
 						console.log("p1 wins!");
 						//P1 wins!
+						endGame("Player 1");
 					}
 				} else if (outcome == 'M'){
 					$('.gridRight .cell[ row = ' + shotRow + '][ col = ' + shotCol + ']').css("background-color", "rgb(0, 0, 255)");
 					hasShot = true;
 				}
+				$('#startTurn').prop('disabled', false);
+				$('#endTurn').prop('disabled', false);
 			}
+		if(RnumShips-1 == shipCount){
+			$('#startTurn').prop('disabled', false);
+			$('#endTurn').prop('disabled', false);
+		}
 	}); 
 	$("#startTurn").click(function(){
 		hideShips(currentTurn);
 		switchTurn();
+		$('#startTurn').prop('disabled', true);
+		$('#endTurn').prop('disabled', true);
 	});
 	$("#endTurn").click(function(){
 		if(LnumShips-1 == shipCount){
