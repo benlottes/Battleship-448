@@ -1,5 +1,7 @@
 let currentTurn = 1;
-let hasShot = false;
+let hasShot = true;
+let LshipsPlaced = false;
+let RshipsPlaced = false;
 let placeHead;
 let placeTail;
 
@@ -149,23 +151,48 @@ document.addEventListener("DOMContentLoaded", () => {
 	while (true)
 	{
 		if (shipCount<=6 &&shipCount>=1){
-		break;}
+			break;
+		}
 		else {
-			shipCount = window.prompt("Try Again! \n How many ships do you want to play with? (minimum: 1 | maximum: 6");}
+			shipCount = window.prompt("Try Again! \n How many ships do you want to play with? (minimum: 1 | maximum: 6");
+
+		}
 	} 
-	
+	p1Board = new board(shipCount);
+	p2Board = new board(shipCount);
 	startGame(shipCount);
 	
 	//$(".gridRight .cell").click(function(){
 	//});
 })
-
-
-
 let p1Board;
 let p2Board;
 let Lships;
 let Rships;
+
+function restoreShips(turn){
+	if(turn == 1){
+		$(".gridRight .cell").each(function(){
+			let row = parseInt($(this).attr('row'));
+			let col = parseInt($(this).attr('col'));
+			if(p2Board.board[row][col] instanceof ship && ($(this).css("background-color") != "rgb(255, 0, 0)")){ // if cell is ship and not a hit set to grey
+				$(this).css("background-color", "grey");
+			}
+		});
+	}
+	else{
+		$(".gridLeft .cell").each(function(){
+			let row = parseInt($(this).attr('row'));
+			let col = parseInt($(this).attr('col'));
+		    if(p1Board.board[row][col] instanceof ship && ($(this).css("background-color") != "rgb(255, 0, 0)")){ // if cell is ship and not a hit set to grey
+				$(this).css("background-color", "grey");
+			}
+		});
+	}	
+}
+
+let RnumShips = 1;
+let LnumShips = 1;
 
 function startGame(shipCount){
 // logic for placing ships
@@ -179,8 +206,8 @@ function startGame(shipCount){
 	let RheadCol;
 	let RtailRow;
 	let RtailCol;
-	p1Board = new board(shipCount);
-	p2Board = new board(shipCount);
+
+	
 	
 	// this updates with new clicks but find a way to update color with click
 	/* $(".gridLeft .cell").click(function(){
@@ -196,9 +223,8 @@ function startGame(shipCount){
 	Lships = [];
 	Rships = [];
 	let LcolorIndex = 1;
-	let LnumShips = 1;
 	let RcolorIndex = 1;
-	let RnumShips = 1;
+
 	$(".gridLeft .cell").click(function(){
 		if(currentTurn == 1 && LnumShips <= shipCount){
 			if(LchooseHead){
@@ -292,38 +318,30 @@ function startGame(shipCount){
 					}
 					//check if more boats to place after this, if not choose tail choose head need to be false
 					p1Board.placeShip(Lships[LnumShips-1], LtailRow, LtailCol);
-					if(LnumShips <= shipCount){
-						LchooseHead = true;
-						LchooseTail = false;
-					}else{
-						LchooseHead = false;
-						LchooseTail = false;
-					}
+					LchooseHead = true;
+					LchooseTail = false;
 					LnumShips++;
-
 				}
 			} 
-			} else if (currentTurn == 2 && !hasShot) {
-				shotRow = parseInt($(this).attr("row"));
-				shotCol = parseInt($(this).attr("col"));
-				outcome = p1Board.attemptedShot(shotRow, shotCol);
-				console.log(shotRow + ' ' + shotCol + ' ' + outcome);
-				if(outcome == 'H'){
-					$('.gridLeft .cell[ row = ' + shotRow + '][ col = ' + shotCol + ']').css("background-color", "rgb(255, 0, 0)");
-					hasShot = true;
-					if(p1Board.allSunk()){
-						console.log("p2 wins!");
-						//P2 wins!
-					}
-				} else if (outcome == 'M'){
-					$('.gridLeft .cell[ row = ' + shotRow + '][ col = ' + shotCol + ']').css("background-color", "rgb(0, 0, 255)");
-					hasShot = true;
+		} else if (currentTurn == 2 && !hasShot && RshipsPlaced && RshipsPlaced) {
+			shotRow = parseInt($(this).attr("row"));
+			shotCol = parseInt($(this).attr("col"));
+			outcome = p1Board.attemptedShot(shotRow, shotCol);
+			if(outcome == 'H'){
+				$('.gridLeft .cell[ row = ' + shotRow + '][ col = ' + shotCol + ']').css("background-color", "rgb(255, 0, 0)");
+				hasShot = true;
+				if(p1Board.allSunk()){
+					console.log("p2 wins!");
+					//P2 wins!
 				}
+			} else if (outcome == 'M'){
+				$('.gridLeft .cell[ row = ' + shotRow + '][ col = ' + shotCol + ']').css("background-color", "rgb(0, 0, 255)");
+				hasShot = true;
+			}
 		}
 	});
 	 $(".gridRight .cell").click(function(){
 		if(currentTurn == 2 && RnumShips <= shipCount){
-			console.log(Rships);
 			if(RchooseHead){
 				RheadRow = $(this).attr("row");
 				RheadCol = $(this).attr("col");
@@ -418,23 +436,15 @@ function startGame(shipCount){
 					}
 					//check if more boats to place after this, if not choose tail choose head need to be false
 					p2Board.placeShip(Rships[RnumShips-1], RtailRow, RtailCol);
-					if(RnumShips <= shipCount){
-						RchooseHead = true;
-						RchooseTail = false;
-					} else {
-						RchooseHead = false;
-						RchooseTail = false;
-					}
-
+					RchooseHead = true;
+					RchooseTail = false;
 					RnumShips++;
-
 				}
 			}
-		} else if (currentTurn == 1 && !hasShot) {
+		} else if ((currentTurn == 1 && !hasShot) && LshipsPlaced && LshipsPlaced) {
 				shotRow = parseInt($(this).attr("row"));
 				shotCol = parseInt($(this).attr("col"));
 				outcome = p2Board.attemptedShot(shotRow, shotCol);
-				console.log(shotRow + ' ' + shotCol + ' ' + outcome);
 				if(outcome == 'H'){
 					$('.gridRight .cell[ row = ' + shotRow + '][ col = ' + shotCol + ']').css("background-color", "rgb(255, 0, 0)");
 					hasShot = true;
@@ -451,5 +461,19 @@ function startGame(shipCount){
 	$("#startTurn").click(function(){
 		hideShips(currentTurn);
 		switchTurn();
+	});
+	$("#endTurn").click(function(){
+		if(LnumShips-1 == shipCount){
+			LchooseHead = false;
+			LchooseTail = false;
+			LshipsPlaced = true;
+		}
+		if(RnumShips-1 == shipCount){
+			console.log("hey");
+			RshipsPlaced = true;
+			RchooseHead = false;
+			RchooseTail = false;
+		}
+			restoreShips(currentTurn);
 	});
 }
