@@ -10,9 +10,11 @@ function switchTurn(){
 	if(currentTurn == 1){
 		hasShot = false;
 		currentTurn = 2;
+		$("#turn").text("Current Turn: Player 2");
 	}else{
 		hasShot = false;
 		currentTurn = 1;
+		$("#turn").text("Current Turn: Player 1");
 	}
 }
 
@@ -170,7 +172,6 @@ function startGame(shipCount){
 	$('#endTurn').prop('disabled', true);
 	
 	$(".gridLeft .cell").click(function(){
-		console.log(LchooseHead + ' ' + LchooseTail);
 		if(currentTurn == 1 && LnumShips <= shipCount){
 			if(LchooseHead){
 				LheadRow = $(this).attr("row");
@@ -270,13 +271,18 @@ function startGame(shipCount){
 						LnumShips++;
 					}
 				} 
-			} else if (currentTurn == 2 && !hasShot && RshipsPlaced && RshipsPlaced) {
+			} else if (currentTurn == 2 && !hasShot && RshipsPlaced) {
 				shotRow = parseInt($(this).attr("row"));
 				shotCol = parseInt($(this).attr("col"));
 				outcome = p1Board.attemptedShot(shotRow, shotCol);
 				if(outcome == 'H'){
 					$('.gridLeft .cell[ row = ' + shotRow + '][ col = ' + shotCol + ']').css("background-color", "rgb(255, 0, 0)");
+					$('.gridLeft .cell[ row = ' + shotRow + '][ col = ' + shotCol + ']').text("\nH");
 					hasShot = true;
+					
+					if(p1Board.board[shotRow][shotCol] instanceof ship && p1Board.board[shotRow][shotCol].isSunk()){
+						$("#mode").text("You sunk your opponents 1x" + p1Board.board[shotRow][shotCol].getSize() + " battleship!");
+					}
 					
 					if(p1Board.allSunk()){
 						console.log("p2 wins!");
@@ -285,6 +291,7 @@ function startGame(shipCount){
 					}
 				} else if (outcome == 'M'){
 					$('.gridLeft .cell[ row = ' + shotRow + '][ col = ' + shotCol + ']').css("background-color", "rgb(0, 0, 255)");
+					$('.gridLeft .cell[ row = ' + shotRow + '][ col = ' + shotCol + ']').text("\nM");
 					hasShot = true;
 				}
 				$('#endTurn').prop('disabled', false);
@@ -395,13 +402,19 @@ function startGame(shipCount){
 						RnumShips++;
 					}
 				}
-			} else if ((currentTurn == 1 && !hasShot) && LshipsPlaced && LshipsPlaced) {
+			} else if ((currentTurn == 1 && !hasShot) && LshipsPlaced) {
 					shotRow = parseInt($(this).attr("row"));
 					shotCol = parseInt($(this).attr("col"));
 					outcome = p2Board.attemptedShot(shotRow, shotCol);
 					if(outcome == 'H'){
 						$('.gridRight .cell[ row = ' + shotRow + '][ col = ' + shotCol + ']').css("background-color", "rgb(255, 0, 0)");
+						$('.gridRight .cell[ row = ' + shotRow + '][ col = ' + shotCol + ']').text("\nH");
 						hasShot = true;
+						
+						if(p2Board.board[shotRow][shotCol] instanceof ship && p2Board.board[shotRow][shotCol].isSunk()){
+							$("#mode").text("You sunk your opponents 1x" + p2Board.board[shotRow][shotCol].getSize() + " battleship!");
+						}
+						
 						if(p2Board.allSunk()){
 							console.log("p1 wins!");
 							//P1 wins!
@@ -409,6 +422,7 @@ function startGame(shipCount){
 						}
 					} else if (outcome == 'M'){
 						$('.gridRight .cell[ row = ' + shotRow + '][ col = ' + shotCol + ']').css("background-color", "rgb(0, 0, 255)");
+						$('.gridRight .cell[ row = ' + shotRow + '][ col = ' + shotCol + ']').text("\nM");
 						hasShot = true;
 					}
 					$('#endTurn').prop('disabled', false);
@@ -422,6 +436,9 @@ function startGame(shipCount){
 		switchTurn();
 		$('#startTurn').prop('disabled', true);
 		$('#endTurn').prop('disabled', true);
+		
+		if (RshipsPlaced && LshipsPlaced)
+			$("#mode").text("Shoot"); // change game mode to shoot
 	});
 	$("#endTurn").click(function(){
 		if(LnumShips-1 == shipCount){
@@ -432,7 +449,6 @@ function startGame(shipCount){
 		}
 		if(RnumShips-1 == shipCount){
 			$('#startTurn').prop('disabled', false);
-			console.log("hey");
 			RshipsPlaced = true;
 			RchooseHead = false;
 			RchooseTail = false;
