@@ -9,6 +9,62 @@ class AITests
         console.log(`Random test: ${} with random score of ${}`, (randomAIPlaceScore > 0 ? "PASSED" : "FAILED"), randomAIPlaceScore);
     }
 
+    testMediumAI() {
+        // Tests: See if we give it a ship spot if it can sink it in X turns with X being ship size
+        let aiBoard = new board(6);
+        
+        let mediumAI = new AI("medium");
+
+        // TODO: This needs to be implemented
+        let ships = mediumAI.placeShips();
+ 
+        let currentHit = null;
+
+        // We want to fire until we hit a square
+        do
+        {
+            currentHit = mediumAI.fire(aiBoard);  
+        } while(currentHit != 'H');
+
+        let lastFiredSpot = mediumAI.getLastFire();
+        let firedShip = aiBoard[lastFiredSpot[0]][lastFiredSpot[1]];
+
+        // At this point, we want to make sure this ship size is larger than two, so we'll check for that
+        if(firedShip.getSize() <= 2)
+        {
+            // Then we'll just run the test again, so we'll recurse
+            return this.testMediumAI();
+        }
+
+        for(let i = 0; i < 4; i++)
+        {
+            // Fire again
+            currentHit = mediumAI.fire(aiBoard);
+
+            // If we hit, break from the loop
+            if(currentHit == 'H')
+            {
+                break;
+            }
+        }
+
+        // If we get through the for loop and we did not hit anything, the test failed
+        if(currentHit == 'M')
+        {
+            return false;
+        }
+
+        // If it makes it all the way then our AI did it right, and we should be able to then keep going for the size of the ship to sink it
+        // We will fire two less than the ship size since we already fired on two of the squared
+        for(var i = 0; i < firedShip.getSize() - 2; i++)
+        {
+            mediumAI.fire(aiBoard);
+        }
+
+        // At this point the ship should be sunk, if it's not then the AI doesn't work properly
+        return firedShip.isSunk(); 
+    }
+
     easyFullTest() {
         // For an easy AI, first we need to establish a game
         // Make a new board for the player and the AI 
@@ -52,7 +108,7 @@ class AITests
     }
 
     easyRandomTest() {
-        let easyAi = new AI()
+        let easyAi = new AI("easy");
         let aiOneBoard = new board(6);
         let aiTwoBoard = new board(6);
 
