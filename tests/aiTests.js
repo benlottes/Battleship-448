@@ -3,16 +3,19 @@ class AITests
     // TODO: Assumes an AI class
     testEasyAI() {
         console.log("Easy AI tests:");
-        console.log(`Full test: ${}`, (easyFullTest() ? "PASSED" : "FAILED"));
+        console.log(`Full test: ${}`, (this.easyFullTest() ? "PASSED" : "FAILED"));
 
-        let randomAIPlaceScore = easyRandomTest(); 
+        let randomAIPlaceScore = this.easyRandomTest(); 
         console.log(`Random test: ${} with random score of ${}`, (randomAIPlaceScore > 0 ? "PASSED" : "FAILED"), randomAIPlaceScore);
+
+        console.log(`\nMedium AI sunk ship test: ${}`, (this.testMediumAI() ? "PASSED" : "FAILED"));
     }
 
     testMediumAI() {
         // Tests: See if we give it a ship spot if it can sink it in X turns with X being ship size
         let aiBoard = new board(6);
         
+        // TODO: This needs to be implemented
         let mediumAI = new AI("medium");
 
         // TODO: This needs to be implemented
@@ -23,9 +26,11 @@ class AITests
         // We want to fire until we hit a square
         do
         {
+            // TODO: This needs to be implemented
             currentHit = mediumAI.fire(aiBoard);  
         } while(currentHit != 'H');
 
+        // TODO: This needs to be implemented
         let lastFiredSpot = mediumAI.getLastFire();
         let firedShip = aiBoard[lastFiredSpot[0]][lastFiredSpot[1]];
 
@@ -39,6 +44,7 @@ class AITests
         for(let i = 0; i < 4; i++)
         {
             // Fire again
+            // TODO: This needs to be implemented
             currentHit = mediumAI.fire(aiBoard);
 
             // If we hit, break from the loop
@@ -58,6 +64,7 @@ class AITests
         // We will fire two less than the ship size since we already fired on two of the squared
         for(var i = 0; i < firedShip.getSize() - 2; i++)
         {
+            // TODO: This needs to be implemented
             mediumAI.fire(aiBoard);
         }
 
@@ -81,6 +88,7 @@ class AITests
         // The first test I have is that we call the AI fire function for as many squares as there are on the board
         // If all the squares are full, then we at least know it's doing that right
         for(let i = 0; i < 90; i++) {
+            // TODO: This needs to be implemented
             easyAI.fire(aiBboard);
         }
 
@@ -108,16 +116,20 @@ class AITests
     }
 
     easyRandomTest() {
+        // TODO: This needs to be implemented
         let easyAi = new AI("easy");
         let aiOneBoard = new board(6);
         let aiTwoBoard = new board(6);
 
-        for(let i = 0; i < 90; i++) {
+        for(let i = 0; i < 30; i++) {
+            // TODO: This needs to be implemented
             easyAI.fire(aiOneBoard); // TODO: Implement this function
             easyAI.fire(aiTwoBoard); // TODO: Implement this function
         }
 
-        return randomBoardTest(aiOneBoard, aiTwoBoard);
+        // Get a score of how random is from 0 to 2 based on how many of the squares of the 30 turns are different
+        // 0 means no randomness, and two means it's too random, the closer to one the better, but anywhere from 1 to 2 is acceptable
+        return randomBoardTest(aiOneBoard, aiTwoBoard) / 30;
     }
 
     randomBoardTest(boardOne, boardTwo) {
@@ -131,8 +143,7 @@ class AITests
             }
         }
 
-        // Divide by 90 because it's the size of the board
-        return randomScore / 90;
+        return randomScore;
     }
 
     startAIGame(aiLevel) {
