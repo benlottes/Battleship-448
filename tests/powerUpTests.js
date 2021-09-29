@@ -7,7 +7,7 @@ class PowerUpTest
         powerUpBoard = new board(shipCount);
     }
     squaresAreHit(row, col) {
-        this.powerUpBoard.powerUpShot(row, col);
+        this.powerUpBoard.multiShot(row, col);
         if(this.powerUpBoard[row][col]!=1) 
         {
             return false;
@@ -42,7 +42,7 @@ class PowerUpTest
                 this.powerUpBoard[r][c]=0;
             }
         }
-        this.powerUpBoard.powerUpShot(row, col);
+        this.powerUpBoard.multiShot(row, col);
         for(var r=0; r<=8; r++)
         {
             for(var c=0; c<=9; c++)
@@ -81,7 +81,7 @@ class PowerUpTest
     }
     rejectsInvalidInput(row, col)
     {
-        output = powerUpBoard.powerUpShot(row, col);
+        output = powerUpBoard.multiShot(row, col);
         if((col>=2)||(col<0))
         {
             if(output=='I')
@@ -93,7 +93,7 @@ class PowerUpTest
                 return false;
             }
         }
-        else if((row<0)||(row>=9))
+        else if((row<0)||(row>=8))
         {
             if(output=='I')
             {

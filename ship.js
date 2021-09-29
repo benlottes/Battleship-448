@@ -3,7 +3,7 @@
 * of the ship. It has methods to check if a ship has been sunk and to register hits 
 */
 
-class ship{
+export class ship{
 	
 	/**
 	* The constructor creatses and array for each ship and stores the size, team, rowHead and colHead

@@ -1,3 +1,5 @@
+import {ship} from './ship.js';
+//import './ship.js';
 class board{
 	/**
 	*Creates a ship object containing 9 rows, 10 columns, a 2d array to act as our board, and an array to contain
@@ -36,6 +38,38 @@ class board{
 			}	
 		}
 		return 'I';//not a valid shot 
+	}
+
+	multiShot(row, col){
+		if((col>=2)||(col<0))
+		{
+			throw "One or more targeted squares are off of the board";
+		}
+		else if((row<0)||(row>=8))
+		{
+			throw "One or more targeted squares are off of the board";
+		}
+		else
+		{
+
+		}
+		var arr = [];
+		for(var i=0; i<=4; i++)
+		{
+			if(this.board[row][col+(2*i)] == 0)
+			{
+				arr.push('\0');
+			}
+			else if(this.board[row][col+(2*i)] instanceof ship)
+			{
+				arr.push(this.board[row][col+(2*i)]);
+			}
+			else
+			{
+
+			}
+		}
+		return arr;
 	}
 	/**
 	*The placeShip function is provided a ship, and an index in the array for the tail position
@@ -149,3 +183,7 @@ class board{
 	}
 	
 }
+var myboard = new board(2);
+var myShip = new ship(3, 1, 1, 1);
+myboard.placeShip(myShip, 1, 3);
+console.log(myboard.multiShot(1, 0));
