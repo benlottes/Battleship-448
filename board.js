@@ -1,5 +1,3 @@
-import {ship} from './ship.js';
-//import './ship.js';
 class board{
 	/**
 	*Creates a ship object containing 9 rows, 10 columns, a 2d array to act as our board, and an array to contain
@@ -24,6 +22,7 @@ class board{
 	*@return a 'M' when the player misses, a 'H' when the player hits a ship, and an 'I' otherwise.
 	*/
 	attemptedShot(row,col){
+		//$('.gridLeft .cell[ row = 2][ col = 2]').css("background-color", "rgb(0, 0, 255)");
 		if(this.board[row][col] == 0){//empty spot - valid shot 
 			this.board[row][col]=1;//if shot takes place replace zero with 1
 			return 'M';
@@ -41,35 +40,48 @@ class board{
 	}
 
 	multiShot(row, col){
-		if((col>=2)||(col<0))
+		var outCome; 
+		for(var i=0; i<=8; i+=2)
 		{
-			throw "One or more targeted squares are off of the board";
-		}
-		else if((row<0)||(row>=8))
-		{
-			throw "One or more targeted squares are off of the board";
-		}
-		else
-		{
+			outCome = this.attemptedShot(row, col+i);
+			if(outCome == 'H')
+			{
+				if(currentTurn == 1)
+				{
+					$('.gridRight .cell[ row = ' + row + '][ col = ' + (col+i) + ']').css("background-color", "rgb(255, 0, 0)");
+					$('.gridRight .cell[ row = ' + row + '][ col = ' + (col+i) + ']').text("\nH");
+				}
+				else if(currentTurn == 2)
+				{
+					$('.gridLeft .cell[ row = ' + row + '][ col = ' + (col+i) + ']').css("background-color", "rgb(255, 0, 0)");
+					$('.gridLeft .cell[ row = ' + row + '][ col = ' + (col+i) + ']').text("\nH");
+				}
 
+				if(this.board[row][col+i] instanceof ship && this.board[row][col+i].isSunk()){
+					$("#mode").text("You sunk your opponents 1x" + this.board[row][col+i].getSize() + " battleship!");
+				}
+				$('#endTurn').prop('disabled', false);
+				if(this.allSunk()){
+					console.log("p2 wins!");
+					//P2 wins!
+					endGame("Player 2");
+				}
+			} 
+			else if (outCome == 'M' || outCome == 'I')
+			{
+				if(currentTurn == 1)
+				{
+					$('.gridRight .cell[ row = ' + row + '][ col = ' + (col+i) + ']').css("background-color", "rgb(0, 0, 255)");
+					$('.gridRight .cell[ row = ' + row + '][ col = ' + (col+i) + ']').text("\nM");
+				}
+				else if(currentTurn == 2)
+				{
+					$('.gridLeft .cell[ row = ' + row + '][ col = ' + (col+i) + ']').css("background-color", "rgb(0, 0, 255)");
+					$('.gridLeft .cell[ row = ' + row + '][ col = ' + (col+i) + ']').text("\nM");
+				}
+				$('#endTurn').prop('disabled', false);
+			}
 		}
-		var arr = [];
-		for(var i=0; i<=4; i++)
-		{
-			if(this.board[row][col+(2*i)] == 0)
-			{
-				arr.push('\0');
-			}
-			else if(this.board[row][col+(2*i)] instanceof ship)
-			{
-				arr.push(this.board[row][col+(2*i)]);
-			}
-			else
-			{
-
-			}
-		}
-		return arr;
 	}
 	/**
 	*The placeShip function is provided a ship, and an index in the array for the tail position
@@ -183,7 +195,7 @@ class board{
 	}
 	
 }
-var myboard = new board(2);
+/*var myboard = new board(2);
 var myShip = new ship(3, 1, 1, 1);
 myboard.placeShip(myShip, 1, 3);
-console.log(myboard.multiShot(1, 0));
+console.log(myboard.multiShot(1, 1));*/
