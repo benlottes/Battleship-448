@@ -357,6 +357,7 @@ function startGame(shipCount){
 						$('#endTurn').prop('disabled', false);
 					}
 				}
+				hasShot = true;
 			}
 		if(currentTurn == 1 && hasShot && LnumShips-1 == shipCount){
 			$('#endTurn').prop('disabled', false);

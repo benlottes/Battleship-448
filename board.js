@@ -67,7 +67,7 @@ class board{
 					endGame("Player 2");
 				}
 			} 
-			else if (outCome == 'M' || outCome == 'I')
+			else if (outCome == 'M')
 			{
 				if(currentTurn == 1)
 				{
