@@ -6,7 +6,6 @@ let placeHead;
 let placeTail;
 let hasPowerUp = 0;
 let currentPowerUp = 0;
-//let powerUp = false;
 /** 
 *When this function is called it first checks what value currentTurn holds, either 1 or 2 for player one and player two. 
 *Then the function sets the Boolean value hasShot to false because each turn switch will require the player to shoot again.
@@ -318,8 +317,8 @@ function startGame(shipCount){
 			} else if (currentTurn == 2 && !hasShot && RshipsPlaced) {
 				shotRow = parseInt($(this).attr("row"));
 				shotCol = parseInt($(this).attr("col"));
-				hasPowerUp = 1;
-				currentPowerUp = 2;
+				//hasPowerUp = 1;
+				//currentPowerUp = 2;
 				if(hasPowerUp && currentPowerUp)
 				{
 					switch (currentPowerUp)
@@ -467,8 +466,8 @@ function startGame(shipCount){
 			} else if ((currentTurn == 1 && !hasShot) && LshipsPlaced) {
 					shotRow = parseInt($(this).attr("row"));
 					shotCol = parseInt($(this).attr("col"));
-					hasPowerUp = 1;
-					currentPowerUp = 2;
+					//hasPowerUp = 1;
+					//currentPowerUp = 2;
 					if(hasPowerUp && currentPowerUp)
 					{
 						switch (currentPowerUp)
