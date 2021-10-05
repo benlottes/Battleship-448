@@ -37,6 +37,51 @@ class board{
 		}
 		return 'I';//not a valid shot 
 	}
+
+	multiShot(row, col){
+		var outCome; 
+		for(var i=0; i<=8; i+=2)
+		{
+			outCome = this.attemptedShot(row, col+i);
+			if(outCome == 'H')
+			{
+				if(currentTurn == 1)
+				{
+					$('.gridRight .cell[ row = ' + row + '][ col = ' + (col+i) + ']').css("background-color", "rgb(255, 0, 0)");
+					$('.gridRight .cell[ row = ' + row + '][ col = ' + (col+i) + ']').text("\nH");
+				}
+				else if(currentTurn == 2)
+				{
+					$('.gridLeft .cell[ row = ' + row + '][ col = ' + (col+i) + ']').css("background-color", "rgb(255, 0, 0)");
+					$('.gridLeft .cell[ row = ' + row + '][ col = ' + (col+i) + ']').text("\nH");
+				}
+
+				if(this.board[row][col+i] instanceof ship && this.board[row][col+i].isSunk()){
+					$("#mode").text("You sunk your opponents 1x" + this.board[row][col+i].getSize() + " battleship!");
+				}
+				$('#endTurn').prop('disabled', false);
+				if(this.allSunk()){
+					console.log("p2 wins!");
+					//P2 wins!
+					endGame("Player 2");
+				}
+			} 
+			else if (outCome == 'M')
+			{
+				if(currentTurn == 1)
+				{
+					$('.gridRight .cell[ row = ' + row + '][ col = ' + (col+i) + ']').css("background-color", "rgb(0, 0, 255)");
+					$('.gridRight .cell[ row = ' + row + '][ col = ' + (col+i) + ']').text("\nM");
+				}
+				else if(currentTurn == 2)
+				{
+					$('.gridLeft .cell[ row = ' + row + '][ col = ' + (col+i) + ']').css("background-color", "rgb(0, 0, 255)");
+					$('.gridLeft .cell[ row = ' + row + '][ col = ' + (col+i) + ']').text("\nM");
+				}
+				$('#endTurn').prop('disabled', false);
+			}
+		}
+	}
 	/**
 	*The placeShip function is provided a ship, and an index in the array for the tail position
 	*The function then uses the newShip's head location to iterate through the board and add
@@ -149,3 +194,4 @@ class board{
 	}
 	
 }
+
