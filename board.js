@@ -22,7 +22,6 @@ class board{
 	*@return a 'M' when the player misses, a 'H' when the player hits a ship, and an 'I' otherwise.
 	*/
 	attemptedShot(row,col){
-		//$('.gridLeft .cell[ row = 2][ col = 2]').css("background-color", "rgb(0, 0, 255)");
 		if(this.board[row][col] == 0){//empty spot - valid shot 
 			this.board[row][col]=1;//if shot takes place replace zero with 1
 			return 'M';
@@ -195,7 +194,4 @@ class board{
 	}
 	
 }
-/*var myboard = new board(2);
-var myShip = new ship(3, 1, 1, 1);
-myboard.placeShip(myShip, 1, 3);
-console.log(myboard.multiShot(1, 1));*/
+
