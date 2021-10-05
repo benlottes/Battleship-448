@@ -125,24 +125,116 @@
 		<button id = "startTurn">Start Turn</button>
 		  <div id = "rectangle1" style = "display:none"></div>
         <div id = "rectangle2" style = "display:none"></div>
+
+		<button id = "multiShot">Multi Shot</button>
+
+		<button id = "torpedo">Torpedo</button>
+
         <script>
+				var oneTimeCounter = 0;
+				var counter = 0;
 				var rectangle1 = document.getElementById("rectangle1");
 				var rectangle2 = document.getElementById("rectangle2");
 
-		 
+
+				document.getElementById("multiShot").disabled = true;
+				document.getElementById("torpedo").disabled = true;
+
 
 				var endTurn = document.getElementById("endTurn");
 				endTurn.addEventListener("click",function(){
+					if(oneTimeCounter>1)
+					{
+						counter++;
+					}
+					oneTimeCounter++;
 					rectangle1.style.display = "block";
 					rectangle2.style.display = "block";
+					currentPowerUp = 0;
+					document.getElementById("multiShot").disabled = true;
+					document.getElementById("torpedo").disabled = true;
 				});
 
 		 
 
 				var startTurn = document.getElementById("startTurn");
 				startTurn.addEventListener("click",function(){
+					if((counter % 16 == 0) && (counter != 0))
+					{
+						p1HasMultiShot = 1;
+					}
+					else if(((counter % 17) == 0) && (counter!=0))
+					{
+						p2HasMultiShot = 1;
+					}
+					if((counter % 10 == 0) && (counter != 0))
+					{
+						p1HasTorpedo = 1;
+					}
+					else if(((counter % 11) == 0) && (counter!=0))
+					{
+						p2HasTorpedo = 1;
+					}
+					if((currentTurn == 2) && p1HasMultiShot)
+					{
+						document.getElementById("multiShot").disabled = false;
+					}
+					else if((currentTurn == 1) && p2HasMultiShot)
+					{
+						document.getElementById("multiShot").disabled = false;
+					}
+					else
+					{
+						document.getElementById("multiShot").disabled = true;
+					}
+					if((currentTurn == 2) && p1HasTorpedo)
+					{
+						document.getElementById("torpedo").disabled = false;
+					}
+					else if((currentTurn == 1) && p2HasTorpedo)
+					{
+						document.getElementById("torpedo").disabled = false;
+					}
+					else
+					{
+						document.getElementById("torpedo").disabled = true;
+					}
 					rectangle1.style.display = "none";
 					rectangle2.style.display = "none";
+					/*console.log("Current Turn = " + currentTurn);
+					console.log("Current Power Up = " + currentPowerUp);
+					console.log("p1HasMultiShot = " + p1HasMultiShot);
+					console.log("p2HasMultiShot = " + p2HasMultiShot);*/
+				});
+
+				var multiShot = document.getElementById("multiShot");
+				multiShot.addEventListener("click",function(){
+					currentPowerUp = 2;
+					if(currentTurn == 1)
+					{
+						p1HasMultiShot = 0;
+					}
+					else if(currentTurn == 2)
+					{
+						p2HasMultiShot = 0;
+					}
+					document.getElementById("multiShot").disabled = true;
+					
+				});
+
+				var torpedo = document.getElementById("torpedo");
+				torpedo.addEventListener("click",function(){
+					currentPowerUp = 1;
+					if(currentTurn == 1)
+					{
+						p1HasTorpedo = 0;
+					}
+					else if(currentTurn == 2)
+					{
+						p2HasTorpedo = 0;
+					}
+					document.getElementById("torpedo").disabled = true;
+					
 				});
         </script>
 	</body>	

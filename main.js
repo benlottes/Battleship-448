@@ -4,7 +4,10 @@ let LshipsPlaced = false;
 let RshipsPlaced = false;
 let placeHead;
 let placeTail;
-let hasPowerUp = 0;
+let p1HasMultiShot = 0;
+let p1HasTorpedo = 0;
+let p2HasMultiShot = 0;
+let p2HasTorpedo = 0;
 let currentPowerUp = 0;
 /** 
 *When this function is called it first checks what value currentTurn holds, either 1 or 2 for player one and player two. 
@@ -319,14 +322,14 @@ function startGame(shipCount){
 				shotCol = parseInt($(this).attr("col"));
 				//hasPowerUp = 1;
 				//currentPowerUp = 2;
-				if(hasPowerUp && currentPowerUp)
+				if(currentPowerUp)
 				{
 					switch (currentPowerUp)
 					{
 						case 0:
 							break;
 						case 1:
-							p1Board.attemptTornado(shotRow, shotCol);
+							p1Board.attemptTorpedo(shotRow, shotCol);
 						case 2:
 							p1Board.multiShot(shotRow, shotCol);
 
@@ -468,14 +471,14 @@ function startGame(shipCount){
 					shotCol = parseInt($(this).attr("col"));
 					//hasPowerUp = 1;
 					//currentPowerUp = 2;
-					if(hasPowerUp && currentPowerUp)
+					if(currentPowerUp)
 					{
 						switch (currentPowerUp)
 						{
 							case 0:
 								break;
 							case 1:
-								p2Board.attemptTornado(shotRow, shotCol);
+								p2Board.attemptTorpedo(shotRow, shotCol);
 							case 2:
 								p2Board.multiShot(shotRow, shotCol);
 

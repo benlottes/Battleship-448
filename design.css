@@ -109,6 +109,38 @@ body{
     text-align: center;
 }
 
+#torpedo{
+	
+	position: relative;
+	left: -275px;
+	top: -173px;
+	display:block;
+    margin: 0 auto;
+    margin-top: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size:1rem;
+    font-weight: 500;
+    line-height: 1;
+    text-align: center;
+}
+
+#multiShot{
+	
+	position: relative;
+	left: 275px;
+	top: -143px;
+	display:block;
+    margin: 0 auto;
+    margin-top: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size:1rem;
+    font-weight: 500;
+    line-height: 1;
+    text-align: center;
+}
+
 #rectangle1 {
     left: 100px;
     margin-top: -60px;
